@@ -1,0 +1,33 @@
+/*
+ * 函数的调用：
+ * 		需要先进行声明，然后在mainz中调用
+ * 		注：在函数声明中参数的名称并不重要，重要的是参数的类型
+ * 			 函数参数可以设置一个默认值，当传递过来的值为空，就会使用默认值。
+ */
+#include<iostream>
+using namespace std;
+// 声明需要调用的函数
+int max(int a,int b);
+int main(){
+	// 局部变量声明
+	int a = 100;
+	int b = 200;
+	int ret;
+
+	// 调用函数来获取最大的值
+	ret = max(a,b);
+	cout << "Max value is : " << ret << endl;
+	return 0;
+}
+
+// 函数返回两个数中较大的数
+int max(int a,int b){
+	// 局部变量声明
+	int result;
+	if(a>b){
+		result = a;
+	}else{
+		result = b;
+	}
+	return result;
+}
