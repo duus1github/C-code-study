@@ -1,0 +1,25 @@
+/*
+ * 字符串：
+ * 			c++中除了拥有c/c++共同拥有的库外还提供了string类型，
+ * 			支持前者所有格的操作，还增加了其他更多的功能，
+ */
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+	// 定义字符串
+	string str1 = "hello";
+	string str2 = "world";
+	string str3;
+	int len;
+	// 复制str1到str3
+	str3 = str1;
+	cout << "str3:"<< str3 << endl;
+	// 连接 str1 和 str2
+	str3 = str1 + str2;
+	cout << "str1 + str2 "<< str3 << endl;
+	// 连接后str3的总长度
+	len = str3.size();
+	cout << "str3的总长度：" << len << endl;
+ 	return 0;
+}
