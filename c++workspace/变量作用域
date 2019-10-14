@@ -1,0 +1,16 @@
+/*
+ * 局部变量：在函数或一个代码快内部声明的变量
+ * 全局变量：在所有函数外部什么的变量
+ * 变量取值按程序执行顺序。
+ */
+#include<iostream>
+using namespace  std;
+// 全局变量的声明
+int g = 20;
+int main(){
+	// 局部变量的声明
+	int g = 10;
+	cout << g;
+	return  0;
+}
+
