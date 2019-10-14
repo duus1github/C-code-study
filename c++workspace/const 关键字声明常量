@@ -1,0 +1,29 @@
+/**
+ * 常量：常量是一个固定值，在程序执行期间不会改变；
+ * 			可以是任意的基本数据类型；
+ * 			其实就是常规的变量，只是在定义之后值不能进行修改
+ * 	定义常量：
+ * 			· 使用#define预处理器
+ * 			· 使用const关键字
+ * 			注：后面无需加分号 “ ; ”
+ * 	#define 预处理器
+ * 	const 关键字定义常量：
+ * 		使用const前缀声明指定类型的常量。
+ * 		注：此方法时声明在函数里面
+ *
+ */
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	const int LENGTH = 10;
+	const int WIDTH = 5;
+	const char NEWLINE = '\n';
+   int area;
+
+   area = LENGTH * WIDTH;
+   cout << area;
+   cout << NEWLINE;
+   return 0;
+}
