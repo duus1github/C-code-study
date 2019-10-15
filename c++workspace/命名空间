@@ -1,0 +1,40 @@
+/*
+ * 命名空间：
+ * 		定义命名空间：
+ * 				使用关键字 namespace
+ * 		调用命名空间的变量
+ * 				name :: code;
+ * 		using指令:
+ * 				使用using namespace 告诉编译器后续代码将使用指定命名空间中的名称
+ *
+ */
+#include <iostream>
+using namespace std;
+
+// 创建第一个命名空间
+namespace first_space{
+	void func(){
+		cout << "Inside first_space" << endl;
+	}
+	// 第二个命名空间
+	namespace second_space{
+		void func(){
+			cout << "Inside second_space" << endl;
+		}
+	}
+}
+// 访问第二个命名空间的函数
+using namespace first_space :: second_space;
+int main(){
+	// 调用第二个命名空间的函数
+	func();
+	return 0;
+}
+
+
+
+
+
+
+
+
