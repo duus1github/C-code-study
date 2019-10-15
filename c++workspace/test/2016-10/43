@@ -1,0 +1,33 @@
+/*
+ * 2016-10 改错题
+ * 		43
+ */
+#include<iostream.h>
+using namespace std;
+void swap(int &a,int &b){
+	a = a+b;
+	b = a-b;
+	a= a-b;
+}
+int main(){
+	int a=5,b=3;
+	cout <<"a="<<a << "b="<<b<<endl;
+	swap(&a,&b);
+	cout<< "a="<<a<<"b="<<b<<endl;
+	return 0;
+}
+// 答案：swap(&a,&b) —>swap(a,b) 如下：
+#include<iostream>
+using namespace std;
+void swap(int &a,int &b){
+	a = a+b;
+	b = a-b;
+	a= a-b;
+}
+int main(){
+	int a=5,b=3;
+	cout <<"a="<<a << "b="<<b<<endl;
+	swap(a,b);
+	cout<< "a="<<a<<"b="<<b<<endl;
+	return 0;
+}
