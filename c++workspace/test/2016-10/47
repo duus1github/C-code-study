@@ -1,0 +1,19 @@
+/*
+ * 2016-10 完成程序题
+ * 		47.完成程序空白处，可参考一下运行结果：
+ */
+#include<iostream>
+using namespace std;
+const double PI=3.1415; // 填空处：定义常量
+double length(float r){// 圆的周长
+	return 2*PI *r;
+
+}
+double length(float x,float y){// 矩形的周长   填空处：double length(float x,float y) 注：形参变量的类型不要忘了。
+	return 2* (x+y);
+}
+int main(){
+	float a = 2 ,b=2,r=4;
+	cout << "圆周长："<< length(r)<< endl;
+	cout << "矩形周长：" << length(a,b)<<endl;
+}
