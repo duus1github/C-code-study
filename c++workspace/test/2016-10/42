@@ -1,0 +1,24 @@
+/*
+ * 2016-10 改错题
+ * 		42
+ */
+#include<iostream>
+using namespace std;
+class Test{
+public:
+	static int x;
+};
+int x = 70;
+void main(){
+	cout << Test::x;
+}
+// 答案：将int x= 70 —> int Test :: x =70； 考察对类中属性的访问 ，如下：
+class Test{
+public :
+	static int x;
+};
+int Test ::x = 70;
+int main(){
+	cout << Test :: x;
+	return 0;
+}
