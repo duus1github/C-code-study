@@ -16,7 +16,7 @@ int main(){
 	cout<< "a="<<a<<"b="<<b<<endl;
 	return 0;
 }
-// 答案：swap(&a,&b) —>swap(a,b) 如下：
+// 答案：swap(&a,&b) —>swap(a,b)，考察形参，再调用是任然用实际的值，他会自动获取到指针地址，如下：
 #include<iostream>
 using namespace std;
 void swap(int &a,int &b){
