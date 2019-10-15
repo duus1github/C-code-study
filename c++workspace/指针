@@ -1,0 +1,28 @@
+/*
+ * 指针：
+ * 		也是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。
+ * 	当然指针还与其他众多相关：
+ * 		NULL指针
+ * 		指针的算术运算
+ * 		指针VS数组
+ * 		指针数组
+ * 		指向指针的指针
+ * 		传递指针给函数
+ * 		从函数返回指针
+ */
+#include <iostream>
+using namespace std;
+int main(){
+	int var = 20; // 实际变量的声明
+	int *ip;  // 指针变量的声明
+	ip = &var; // 在指针变量中存在var地址
+	cout << "Value of var  variable";
+	cout << var << endl;
+	// 输出指针变量中存储的地址
+	cout << "Address stroed in ip variable:";
+	cout << ip << endl;
+	// 访问指针中地址的值
+	cout << " value of *ip variable:";
+	cout << *ip << endl;
+	return 0;
+}
