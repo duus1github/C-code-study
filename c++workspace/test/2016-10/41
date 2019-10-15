@@ -1,0 +1,27 @@
+/*
+ * 2016-10 改错题
+ * 		41
+ */
+#include<iostream>
+using namespace std;
+template < T>
+T max(T x, T y){
+	if(x >= y ) return x;
+	else return y;
+}
+int main(){
+	cout << max(6.07,9.08) << endl;
+	cout << max(30,50) << endl;
+	return 0;
+}
+// 答案：T 模板声明 处添加class/typename,如下：
+template <class T>
+T max(T x, T y){
+	if(x >= y ) return x;
+	else return y;
+}
+int main(){
+	cout << max(6.07,9.08) << endl;
+	cout << max(30,50) << endl;
+	return 0;
+}
