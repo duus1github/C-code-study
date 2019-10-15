@@ -1,0 +1,22 @@
+/*
+ * 2016-10 改错题
+ * 		45
+ */
+#include<iostream>
+using namespace std;
+template <typename AT>
+AT max(AT x,AT y){
+	return (x>y)?x:y;
+
+int main(){
+	int i1 = 10,i2=56;
+	double d1 = 50.344,d2 = 56.346;
+	char c1 = 'k',c2='n';
+	cout << "较大的整数是：" << max(i1,i2) << endl;
+
+	cout << "较大的双精度整型是：" << max(d1,d2);
+	cout<< endl;
+	cout << "较大的字符是：" << max(c1,c2) << endl;
+	return 0;
+}
+// 很明显：定义模板时少了“}" ，加上}即可。
