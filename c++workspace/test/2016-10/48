@@ -1,0 +1,26 @@
+/*
+ * 2016-10 完成程序题
+ * 		48.程序用于在屏幕上显示指定的文本文件的内容
+ */
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main(){
+	ifstream ifile;
+	char fn[20],ch;
+	cout << "输入文件名";
+	// 输入文件名字符串
+	cin >> fn;
+	ifile.open(fn); // 打开指定的文件 填空处：ifile.open(fn)  考察：文件的打开方法
+	if(!ifile){
+		cout << fn <<"文件不能打开"<< endl;
+		return 0;
+	}
+	while((ch=ifile.get())!=EOF)
+		cout << ch;// 输出字符  填空处：cout << ch // 考察：输出读取到的文件信息
+	cout << endl;
+	ifile.close;
+	return 1;
+
+
+}
