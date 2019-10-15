@@ -1,0 +1,31 @@
+/*
+ * 2016-10 改错题
+ * 		44
+ */
+#include<iostream>
+#include<string>
+using namespace std;
+int change(string s){
+	s = s+"dog!";
+	cout << s<<endl;
+}
+int main(){
+	string str = "Is a ";
+	change(str);
+	return 0;
+}
+// 答案：int change(string s) —>void change(),考察函数封装类型的定义，如下：
+
+#include<iostream>
+#include<string>
+using namespace std;
+void change(string s){
+	s = s+"dog!";
+	cout << s<<endl;
+
+}
+int main(){
+	string str = "Is a ";
+	change(str);
+	return 0;
+}
