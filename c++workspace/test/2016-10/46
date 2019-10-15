@@ -1,0 +1,32 @@
+/*
+ * 2016-10 完成程序题
+ * 		46.完成程序空白处，可参考一下运行结果：
+ * 		4 !=24
+ * 		n=-2 1 不能计算n!
+ * 		程序执行结束
+ */
+#include<iostream>
+using namespace std;
+int f(int n) {
+	if (n <= 0)
+		throw n;
+	int s = 1;
+	for(int i=1,i<= n,i++) { // 填空处: int i=1,i<= n,i++ 考察:for循环
+		s += i;// 计算1+2+3....的值
+
+	}
+	return s;
+
+}
+int main() {
+	try {
+		cout << "4 !=" << f(4) << endl; // 填空处:"4 !="<<f(4)  考察：根据结果写出表达式
+		cout << "-2!=" << f(-2) << endl;
+
+	} catch (int n) {
+		cout << "n= " << n << endl;
+	} catch (...) {
+		cout << "出现异常！" << endl;
+	}
+	cout << "程序执行结束！" << endl;
+}
