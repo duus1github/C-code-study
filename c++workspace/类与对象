@@ -1,0 +1,46 @@
+/*
+ * 类与对象：
+ * 		C++是面向对象编程
+ * 		类的定义：
+ * 				以关键字class开头，后跟类的名称
+ */
+#include<iostream>
+using namespace std;
+class Box{
+	public:
+		double length;
+		double breadth;
+		double height;
+
+};
+int main(){
+	Box box1;  // 声明box1,l类型为Box
+	Box box2;
+	double volume = 0.0;
+
+	// box1 详述
+	box1.length = 5.0;
+	box1.breadth = 6.0;
+	box1.height = 7.0;
+
+	// box2的详述
+	box2.length = 10.0;
+	box2.breadth = 12.0;
+	box2.height = 13.0;
+
+	// box1 的体积
+	volume = box1.length * box1.breadth*box1.height;
+	cout << "box1 的 体积为" << volume << endl;
+
+	// box2的体积
+	volume = box2.breadth * box2.height * box2.length;
+	cout << "box2 的体积:" << volume << endl;
+
+
+
+
+
+
+	return 0;
+
+}
