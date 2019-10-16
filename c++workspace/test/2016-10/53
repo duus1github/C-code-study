@@ -1,0 +1,45 @@
+/*
+ * 2016-10 程序设计题
+ * 		53：有个Person 类，私有成员name,age,Sex 分别表示人的姓名，年龄，性别
+ * 				雇员类Employee 是Person的派生类，新增数据成员部门department和
+ * 				薪水salay,
+ * 				请用C++代码描述这两个类，并用Employee类的成员函数display实现雇员的
+ * 				姓名，年龄，性别，部门，薪水的输出（要求编写派生类的构造函数）
+ * 			考点：
+ * 			答案：
+ */
+#include<iostream>
+using namespace std;
+class Person {
+public:
+	Person(char *s1 = "", int a = 0, char *s2 = ""){
+		strcpy(name,sl);
+		age =4;
+		strcpy(sex,s2);
+	}
+protected:
+	char name[8];
+	int age;
+	char sex[2];
+};
+class Employee: public Person {
+public:
+	Employee(char *s1 = "", int a = 0, char *s2 = "", char *s3 = "", double s =0.0) :
+			Person(s1, a, s2) {
+		strcpy(department, s3);
+		salary = s;
+	}
+	void Display() {
+		cout << name << "" << age << "" << sex << " " << department << " "<< salary << endl;
+	}
+	private:
+	char department[20];
+	double salary;
+
+};
+int main() {
+	Employee e("张三", 18, "男", "计算机", 2180.0);
+	e.Display();
+	return 0;
+}
+
