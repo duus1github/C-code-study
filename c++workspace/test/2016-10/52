@@ -1,0 +1,35 @@
+/*
+ * 2016-10 程序分析题：给出程序的输出结果
+ * 		52：
+ * 			考点：倒序排序
+ * 			答案：运行结果：43210
+ */
+#include<iostream>
+using namespace std;
+int main() {
+	void sort(int s[]);
+	int score[5];
+	int i;
+	for (i = 0; i < 5; i++)
+		score[i] = i;
+	sort(score);
+	cout << "运行结果：" << endl;
+	for (i = 0; i < 5; i++) {
+		cout << score[i] << "";
+
+	}
+	return 0;
+}
+void sort(int s[]) {
+	int t;
+	for (int i = 0; i < 4; i++) {
+		for (int j = i+1; j < 5; j++)
+			if (s[i] < s[j]) {
+				t = s[i];
+				s[i] = s[j];
+				s[j] = t;
+			}
+
+	}
+}
+
