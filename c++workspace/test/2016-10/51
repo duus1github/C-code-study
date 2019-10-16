@@ -1,0 +1,27 @@
+/*
+ * 2016-10 程序分析题：给出程序的输出结果
+ * 		51：
+ * 			考点：构造函数的执行顺序: 先执行父类，在执行子类；
+ * 					析构函数的执行顺序相反，
+ * 			答案：clock的构造函数
+ * 					 date的构造函数
+ * 					 date的析造函数
+ * 					 clock的析构函数
+ */
+#include<iostream>
+using namespace std;
+class Clock{
+public:
+	Clock(){cout << "clock的构造函数" << endl; }
+	~Clock(){cout << "clock的析构函数" << endl;}
+};
+class Date{
+public:
+	Date(){cout << "date的构造函数" << endl; }
+	~Date(){cout << "date的析造函数" << endl; }
+};
+int main(){
+	Clock c;
+	Date d;
+	return 0;
+}
