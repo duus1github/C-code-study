@@ -1,0 +1,26 @@
+/*
+ * 2016-10 完成程序题
+ * 		49：类book含有2个数据成员num编号和price价格，
+ * 				有成员函数set 和display分别输入和显示书的编号和价格，
+ * 				在main中调用所有的成员函数
+ * 			考点：1）类函数中变量的定义 、2）main()函数中类方法的调用
+ */
+#include<iostream>
+using namespace std;
+class book{
+private:
+	char num[8];
+	double price;// 填空处 double price 考察：定义变量
+public:
+	void set(){
+		cin>> num>>price;
+	}
+	void display(){
+		cout << num << ""<< price << endl;
+	}
+};
+int main(){
+	book b;
+	b.set();// 填空处 b.set() 考察：函数的调用
+	b.display();
+}
