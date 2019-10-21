@@ -1,0 +1,91 @@
+1.什么是程序？什么是程序设计？
+程序：就是一组计算机能识别和执行的指令。
+程序设计：给出解决特定问题程序的过程，是软件构造活动中的重要组成部分。
+        程序设计往往以某种程序设计语言为工具，给出这种语言下的程序。
+        程序设计过程应当包括分析、设计、编码、测试、排错等不同阶段。
+2.为什么需要计算机语言？高级语言的特点？
+计算机语言，是人与计算机之间传递信息的媒介，为了使计算机进行各种工作，就需要有一套
+          用以编写计算机程序的数字，字符和语法规划，由这些字符和语法规则组成计算机的各种指令
+高级语言的特点：是接近于人习惯使用的自然语言和数字语言。
+              功能强大，不依赖与具体机器
+              用高级语言编写的源程序需要通过编译程序转换为机器指令的目标程序
+3.正确理解一下名词及其含义。
+  (1)源程序  目标程序   可执行程序
+  (2)程序编辑 程序编译  程序连接
+  (3)程序 程序模块  程序文件
+  (4)函数 主函数 被调用函数 库函数
+  (5)程序调试 程序测试
+4.上机运行本章3个例题。
+例1：
+#include<stdio.h> 			// 预处理命令
+int main(){				// 定义主函数
+    printf("This is a c program.\n");
+    return 0;				// 函数执行完毕后返回函数值0
+}
+例2 求两整数之和
+#include<stdio.h>
+int main(){
+    int a,b,sum;
+    a = 123;
+    b = 456;
+    sum = a+b;
+    printf("sum is %d\n",sum);
+    return 0;
+}
+例3 求两个整数的最大者
+#include<stdio.h>
+int main(){
+    int max(int x,int y);		// 对被调用函数的声明
+    int a,b,c;
+    scanf("%d,%d",&a,&b); 		// 输入变量a和b的值
+    c = max(a,b); 			// 调用max()函数，将得到的值赋值给c
+    printf("max=%d\n",c);
+    return 0;
+}
+// 求两个数中较大者的max函数
+int max(int x,int y){			// 定义max函数，
+    int z;				//
+    if(x>y){
+	z = x;
+    }else z=y;
+    return z;				// 将z的值作为max函数值，返回到调用max函数的位置
+}
+5.编写一个c程序，输出以下信息：
+***************
+Very good!
+***************
+#include<stdio.h>
+int main(){
+    printf("*************\n");
+    printf("V e r y  G o o d!\n");
+    printf("*************");
+    return 0;
+}
+6.编写一个c程序，输入a,b,c三个值输出其中最大者
+#include<stdio.h>
+int main(){
+    int max(int x,int y,int z); 	// 初始化调用函数
+    int a,b,c,num;
+    scanf("%d,%d,%d",&a,&b,&c);		// 使用scanf获取用户输入的值
+    num = max(a,b,c);
+    printf("三个数中最大值为：%d",num);
+    return 0;
+}
+int max(int x,int y,int z){
+    int num;
+    if(x>y){
+	num = x;
+    }else num = y;
+    if(x>z){
+	num = x;
+    }else{
+	num = z;
+    }
+    if(y>z){
+	num = y;
+    }else num = z;
+    return num;
+}
+7.上机运行以下程序，注意注释的方法，分析运行结果掌握注释用法。
+块注释/* */
+行注释 //
