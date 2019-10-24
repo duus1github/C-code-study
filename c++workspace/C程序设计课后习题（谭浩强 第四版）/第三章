@@ -20,3 +20,68 @@ int main(){
      c1=197,c2=198
 原因：int类型的值域大于198，所以数字输出是正常的。     
 
+5.用下面的scanf函数输入数据，使a=3,b=7,x=8.5,y=71.82,c1='A',c2='a',问在键盘上如何输入？
+#include<stdio.h>
+int main(){
+    int a,b;
+    float x,y;
+    char c1,c2;
+    scanf("%d%d",&a,&b);
+    scanf("%f%e",&x,&y);
+    scanf("%c%c",&c1,&c2);
+
+    return 0;
+}
+输入:121.21.3ab
+6.请编写程序将“China"编译成密码，密码规律是用原来字母后面第4个字母代替原来的字母，例如字母"A"后面第4个字母是"E",用E代替"A"因此"China"应翻译为"Glmre".
+  请编写一个程序用赋初值的方法，使c1,c2,c3,c4,c5,分别为"G","l","m","r","e".分别用putchar函数和平printf函数输出这5个字符。
+  #include<stdio.h>
+int main(){
+    char c1,c2,c3,c4,c5;
+    c1='C';
+    c2='h';
+    c3='i';
+    c4='n';
+    c5='a';
+    // 使用putchar输出单个字符
+    putchar(c1+4);
+    putchar(c2+4);
+    putchar(c3+4);
+    putchar(c4+4);
+    putchar(c5+4);
+    printf("%c,%c,%c,%c,%c",c1+4,c2+4,c3+4,c4+4,c5+4);
+    return 0;
+}
+7.设半径r=1.5,圆柱高h=3,求圆周长，圆面积，圆球表面积，圆球体积，圆柱体积，用scanf输入数据，输出计算结果，输出时要求有文字说明，取小数点最后2位数字。
+#include<stdio.h>
+int main(){
+	 float h,r,l,s,sq,vq,vz;
+   float pi=3.141526;
+   printf("请输入圆半径r，圆柱高h∶");
+   scanf("%f,%f",&r,&h);               //要求输入圆半径r和圆柱高h
+   l=2*pi*r;                          //计算圆周长l
+   s=r*r*pi;                          //计算圆面积s
+   sq=4*pi*r*r;                       //计算圆球表面积sq
+   vq=3.0/4.0*pi*r*r*r;               //计算圆球体积vq
+   vz=pi*r*r*h;                       //计算圆柱体积vz
+   printf("圆周长为:       l=%6.2f\n",l);
+   printf("圆面积为:       s=%6.2f\n",s);
+   printf("圆球表面积为:   sq=%6.2f\n",sq);
+   printf("圆球体积为:     v=%6.2f\n",vq);
+   printf("圆柱体积为:     vz=%6.2f\n",vz);
+   return 0;
+}
+8.略
+
+
+
+
+
+
+
+
+
+
+
+
+
