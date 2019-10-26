@@ -77,6 +77,109 @@ int main(){
 }
 6.有一个函数：
    写程序，输入x的值，输出y相应的值。
+#include<stdio.h>
+int main(){
+    int x,y;
+    scanf("%d",&x);
+    if(x<1){
+	y = x;
+    }else if(x>=10){
+	y = 3*x-11;
+    }else{
+	y = 2*x-1;
+    }
+    printf("y的值为：%d",y);
+    return 0;
+}
+
 7.有一函数：
-    
-   
+    ...
+    有人分别编写了以下两个程序，请分析他们是否能实现题目需求，不要急于上机运行程序，先分析两个程序的逻辑，画出他们的流程图，分析他们的运行状况，
+    然后上机运行分析他们的结果。
+
+#include<stdio.h>
+int main(){
+    int x,y;
+    printf("enter x:");
+    scanf("%d", &x);
+    y = -1;
+    if (x != 0)
+	{
+	if (x > 0)
+	    {
+	    y = 1;
+	    }
+	 }
+     else
+	    {
+	    y = 0;
+	    }
+
+	
+    printf("x=%d,y=%d",x,y);
+    return 0;
+}
+分析：题目不能实现题目要求，如果输入x<0，则输出y=0,请注意else与if的配对关系。
+程序中else子句是和第9行的内嵌的if语句配对，而不与第8行的if语句配对。
+#include<stdio.h>
+int main(){
+    int x,y;
+    printf("enter x:");
+    scanf("%d", &x);
+    y = 0;
+    if (x >= 0)
+	{
+	if (x > 0)
+	    {
+	    y = 1;
+	    }
+	}
+    else y = -1;
+    printf("x=%d,y=%d",x,y);
+    return 0;
+}
+分析：也不能实现题目的要求，如果输入的x<0,则输出y=0.
+以上需要注意的是if 与 else的配对请款。
+8.给出一百分制成绩，要求输出成绩等级'A','B','C','D','E',90分以上为'A',80-89为'B'，70-79为'C'，60-69为'D'，60以下为'E'
+方案一：
+#include<stdio.h>
+int main(){
+    int score;
+    char y;
+    printf("请输入分数：");
+    scanf("%d",&score);
+    if(score < 100 || score >0){
+	if(score < 100 && score >= 90){
+	    y='A';
+	}else if(score < 90 && score >= 80){
+	    y='B';
+	}else if(score < 80 && score >= 70){
+	    y='C';
+	}else if(score < 70 && score >= 60){
+	    y='D';
+	}else y = 'E';
+    }
+    printf("得分为：%c",y);
+    return 0;
+}
+方案二：
+#include<stdio.h>
+int main(){
+    int score;
+    char grade;
+    printf("请输入分数：");
+    scanf("%d",&score);
+    while(score>100 || score < 0){
+	printf("\n输入有误，请重输");
+	scanf("%d",&score);
+    }
+    switch((int)score/10){
+    case 9:grade='A';break;
+    case 8:grade='B';break;
+    case 7:grade='C';break;
+    case 6:grade='D';break;
+    case 0:grade='E';break;
+    }
+    printf("得分为：%c",grade);
+    return 0;
+}   
