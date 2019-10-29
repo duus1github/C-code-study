@@ -154,7 +154,43 @@ int main(){
     else printf("不是质数%d",n);
     return 0;
 }
-
+例10：求100-200之间的全部素数
+#include<stdio.h>
+#include<math.h>
+int main(){
+    int k,n =101,i,m;
+    for(;n<=200;n+=2){		// n从100变化到200,对每个n进行判定
+	k=sqrt(n);
+	for(i=2;i<=k;i++){
+	    if(n%i==0)break; 	//如果n被i整除终止内循环，此时i<k+1
+	}
+	if(i>=k+1){		//若i>=k+1表示n未被整除
+	    printf("%d ",n);	//应确定n是素数
+	    m=m+1;		//m用来控制换行，一行内输出10个素数
+	}
+	if(m%10==0)printf("\n");//m累计到10的倍数，换行。
+    }
+    printf("\n");
+    return 0;
+}
+例11：译密码，为使电文保密，往往按一定规律将其转化为密码，收报人在按一定规律将其译回原文，例如：将字母A转化为E,a转化为e,W变成A,X变成B,...
+      输入China!转化为Glame!,键盘输入一行字符，要求输出对应的密码。
+#include<stdio.h>
+#include<math.h>
+int main(){
+    char c;
+    c=getchar();
+    while(c!='\n'){ 	// 检测c是否有换行符
+	if((c>='a' && c<='z')||(c>='A'&&c<='Z')){ // 判断输入的是字母
+	    if(c>"W" && c<='Z'|| c>='w' && c<='z')c = c-22; //如果值最后4个字母就-22
+	    else c+=4;				// 正常字母就加4
+	}
+	printf("%c",c);
+	c=getchar();		// 在输入下一个字母
+    }
+    printf("\n");
+    return 0;
+}
 
 
 
