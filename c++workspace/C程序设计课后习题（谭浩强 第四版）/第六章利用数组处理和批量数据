@@ -114,6 +114,25 @@ int main(){
     printf("\n");
     return 0;
 }
+例9：有3个字符串，找出其中的最大者。
+#include<stdio.h>
+int main(){
+    char str[3][20];			// 定义一个 二维数组
+    char temp[20];			//定义一个一维数组，用于交换字符的临时字符数组
+    int i;
+    for(i=0;i<3i++;)
+	gets(str[i]);			// 输入3个字符串，分别赋值给str[0],str[1],str[2]
+    if(strcmp(str[0],str[1])>0){	//若str[0]大于str[1]
+	strcpy(temp,str[0]);		//把str[0]的字符串赋值给字符数组temp（临时存放）
+    }else{				//str[0]<str[1]
+	strcpy(temp,str[1]);		//把str[1]的字符串赋值给字符数组temp（临时存放）
+    }
+    if(strcmp(str[2],temp)>0){		//str[2]与temp比较
+	strcpy(temp,str[2]);		//大于就把str[2]的字符串赋值给字符数组temp（临时存放）
+    }
+    printf("字符串的最大值是%s",temp);
+    return 0;
+}
 
 
 
