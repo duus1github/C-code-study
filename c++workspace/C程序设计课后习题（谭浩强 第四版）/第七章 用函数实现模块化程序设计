@@ -1,1 +1,22 @@
-
+第七章 用函数实现模块化程序设计
+一、例题：
+例1：想输出以下结果，用函数调用实现。
+    *****************
+      how do you do !
+    *****************
+#include<stdio.h>
+int main(){
+    /*
+     * 用函数调用实现结果
+     */
+    void print_str();//先声明，后调用
+    print_str();
+    return 0;
+}
+void print_str(){
+    printf("**************\n");
+    printf("how do you do!\n");
+    printf("***************");
+}
+    
+    
