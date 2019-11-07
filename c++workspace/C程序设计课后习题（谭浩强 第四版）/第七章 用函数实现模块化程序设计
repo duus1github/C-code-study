@@ -18,5 +18,117 @@ void print_str(){
     printf("how do you do!\n");
     printf("***************");
 }
-    
+2.实参和形参的数据传递
+例2.输入两个整数，要求输出其中最大者，要求用函数来找到最大值。
+#include<stdio.h>
+int main(){
+    /*
+     * 用函数调用实现结果
+     */
+    int get_max(),x,y,max;
+    scanf("%d,%d",&x,&y);
+    max = get_max(x,y);       //实参
+    printf("最大值为%d",max);
+    return 0;
+}
+int get_max(int a,int b){     //形参
+    int max;
+    return (a>b?a:b)
+    if(a>b){
+	   max=a;
+    }else max = b;
+    //return max;
+}
+4.函数的返回值。
+例3：将例2做出改变，将在max函数中定义的变量z该为float型，函数返回值的类型与指定的函数类型不同，分析其处理方法。
+#include<stdio.h>
+int main(){
+    /*
+     * 用函数调用实现结果
+     */
+    int get_max(float x,float y),max;
+    float x,y;
+    scanf("%d,%d",&x,&y);
+    max = get_max(x,y);
+    printf("最大值为%d",max);
+    return 0;
+}
+int get_max(float a,float b){
+    float z;
+    z=a>b?a:b;
+    return z;
+}
+例4、输入两个实数，用一个函数求出它们之和。
+#include<stdio.h>
+int main(){
+    /*
+     * 用函数调用实现结果
+     */
+    float sum(float x,float y);
+    float x,y,num;
+    scanf("%f,%f",&x,&y);
+    num = sum(x,y);
+    printf("和为：%f",num);
+    return 0;
+}
+float sum(float a,float b){
+    float num;
+    num=a+b;
+    return num;
+}
+4.函数的嵌套调用
+例5、输入4个整数，找出其中最大的数，用函数的嵌套来处理。
+#include<stdio.h>
+int main(){
+    int get_max(int a,int b,int c,int d);
+    int a,b,c,d,max;
+    scanf("%d,%d,%d,%d",&a,&b,&c,&d);
+    max=get_max(a,b,c,d);
+    printf("%d",max);
+    return 0;
+}
+int get_max(int a,int b,int c,int d){
+    int max(int a,int b); //预先定于需要调用的函数
+    int m;
+    m=max(a,b);		   //调用该函数
+    m=max(m,c);
+    m=max(m,d);
+    //m=max(max(max(a,b),c),d)
+    return m;
+}
+//定义两两比较，返回最大值
+int max(int a,int b){
+    return a>b?a:b;
+}
+7、函数的递归调用
+#include<stdio.h>
+int main(){
+    int f(int x);
+    int x=5;
+    printf("x:%d",f(x));
+    return 0;
+}
+int f(int x){
+    int y,z;
+    z=f(y);		//在执行f函数的过程中又要调用f函数。
+    return 2*z;
+}
+例6、有5个学生坐在一起，问第5个学生多少岁，他说比第4个学生大2岁，问第四个学生的岁数，他说比第3个学生大两岁，问第3个学生，又说比第二个学生大两岁问第2个学生，又说比第1个学生大两岁
+最后问第一个学生他说是10岁，请问第5个学生多大？
+#include<stdio.h>
+int main(){
+    int old(int n);                 //先定义函数
+    printf("第五个人岁数%d",old(5));
+    return 0;
+}
+int old(int n){
+    int c;                    
+    if(n==1)
+	   c=10;
+    else
+	   c=old(n-1)+2;                 //递归调用。
+    return c;
+}
+
+
     
