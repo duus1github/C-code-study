@@ -129,6 +129,52 @@ int old(int n){
 	   c=old(n-1)+2;                 //递归调用。
     return c;
 }
+例7：用递归求n!.
+#include<stdio.h>
+int main(){
+    int fac(int n);			//函数声明
+    int n,y;
+    printf("请输入一个整数");
+    scanf("%d\n",&n);
+    y=fac(n);				//要求几阶
+    printf("%d!=%d\n",n,y);
+    return 0;
+}
+int fac(int n){				//定义函数，分三种情况考虑，小于0，==0，==1；其他
+    int f;
+    if(n<0){
+	printf("data is error");
+    }else if(n==0||n==1){
+	f=1;
+    }else{
+	f=fac(n-1)*n;
+    }
+    return f;
+例8：汉诺塔问题，有一个塔，塔内有三个座A,B,C，开始是A座有64个盘子，盘子大小不等，大的在下，小的再上，
+	现在要把这64个座从A移动到C上，规则是每次只能移动一个盘，在移动的过程中可以利用B座，还是大的在下，小的再上的摆放。
+#include<stdio.h>
+int main(){
+    void hanoi(int n,char one,char two,char three);
+    int m=5;
+    hanoi(m,'A','B','C');
+    return 0;
+}
+void hanoi(int n,char one,char two,char three){
+    /*
+     * 将N个盘从one座借助two座移动到three座
+     */
+    void move(char x,char y);
+    if(n==1)
+	move(one,three);
+    else{
+	hanoi(n-1,one,three,two);
+	move(one,three);
+	hanoi(n-1,two,one,three);
+    }
+}
+void move(char x,char y){
+    printf("%c——>%c\n",x,y);
+}	
 
 
     
