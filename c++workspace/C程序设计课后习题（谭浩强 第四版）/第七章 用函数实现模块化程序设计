@@ -316,6 +316,88 @@ int max(int a[][4]){
     }
     return max_value;
 }
+7.8局部变量和全局变量
+例14、有一个一维数组，内放10个学生成绩，写一个函数，当主函数调用次函数后，能求出平均分，最高分和最低分。
+#include<stdio.h>
+float Max=0,Min=0;			//定义全局变量Max，Min.
+int main(){
+    float average(float arr[],int n);	//函数进行声明
+    float ave,score[10]={1,5,9,7,5,3,4,6,2,12};
+    ave=average(score,10);
+    //输出结果
+    printf("最大值%f\n最小值%f\n平均值：%f\n",Max,Min,ave);
+    return 0;
+}
+float average(float arr[],int n){
+    float ave,sum=0;
+    Min=arr[0],Max = arr[0];	//定义最小值和最大值均为数组的第一元素
+    for(int i=0;i<n;i++){	//for循环进行处理
+	sum+=arr[i];		//计算总分数
+	if(arr[i]>Max){		//如果遇到比max大的值就进行赋值
+	    Max=arr[i];
+	}else if(arr[i]<Min){	//遇到比min小的也进行值互换
+	    Min = arr[i];
+	}
+    }
+    ave = sum/n;		//计算平均值
+    return ave;
+}
+例15、若外部变量与局部变量同名，分析结果
+/*
+ * 例14、有一个一维数组，内放10个学生成绩，写一个函数，当主函数调用次函数后，能求出平均分，最高分和最低分。
+ *	分许：故意设置了全局变量a,b做变量名，mian函数中定义了一个局部变量a,局部变量的作用范围为第17-18行，
+ *	   在此范围内全局变量a被局部变量a屏蔽，而全局变量b任然有效，所以函数调用max(a,b)应该为max(8,5)
+ */
+#include<stdio.h>
+int a=3,b=5;		//定义全局变量
+int main(){
+    int max(int a,int b);	//函数声明，a,b是形参
+    int a=8;		//定义局部变量a
+    printf("max=%d\n",max(a,b));//局部变量a的作用范围，全局变量b的作用范围
+    return 0;
+}
+int max(int a,int b){	//a,b是函数的形参
+    int c;
+    c= a>b?a:b;		//三目运算		形参a,b的作用范围
+    return c;
+}
+7.9、变量的存储方式和生存期
+7.9.1、动态存储方式与静态存储方式
+7.9.2、局部变量的存储类别。
+2.静态局部变量（static局部变量）
+例16、考察局部静态局部变量的值
+#include<stdio.h>
+int main(){
+    int f(int);			//函数声明
+    int a=2,i;			//自动局部变量
+    for(int i=0;i<3;i++){
+	printf("%d\n",f(a));	//输出f(a)的值
+    }
+    return 0;
+}
+int f(int a){
+    auto int b=0;		//自动局部变量
+    static c=3;			//静态局部变量
+    b=b+1;
+    c=c+1;
+    return a+b+c;
+}
+例17、输出1到5的阶乘值。
+#include<stdio.h>
+int main(){
+    int fac(int n);
+    int i;
+    for(i=1;i<=5;i++){
+	printf("%d!=%d\n",i,fac(i));	//每次计算并输出i!的值
+    }
+    return 0;
+}
+int fac(int n){
+    static int f=1;			//f保留了上次调用结束时的值
+    f=f*n;
+    return f;				//返回值f是n!的值
+}
+
 
 
 
