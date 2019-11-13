@@ -175,6 +175,162 @@ void hanoi(int n,char one,char two,char three){
 void move(char x,char y){
     printf("%c——>%c\n",x,y);
 }	
+7.7数组作为函数参数
+例9、输入10个数要求输出其中最大值的元素和该数是第几个元素。
+#include<stdio.h>
+int main(){
+//    int max(int x,int y);
+    int a[10] = {1,5,9,6,4,2,8,3,7,52};
+    //用户输入数组
+//    for(int i=0;i<10;i++){
+//	printf("请输入10个数");
+//	scanf("%d",&a[i]);
+//    }
+    //数组的数进行比较
+    int max = a[0];
+    int j;
+    for(int i=0;i<10;i++){
+	if(max<a[i]){
+	  j=i;
+	  max=a[i];
+	}
+    }
+    printf("最大的数%d,下标为%d",max,j);
+
+    return 0;
+}
+例10、有一个一维数组score,内放10个学生成绩，求平均成绩
+#include<stdio.h>
+int main(){
+    //定义数组/试题中一般是用户输入
+    int score[10] = {98,78,45,56,12,36,69,58,47,35};
+    int sum=0;
+    //总成绩/10
+    for(int i=0;i<10;i++){
+	sum +=score[i];
+    }
+    printf("总成绩为：%d,平均成绩为：%d",sum,sum/10);
+    return 0;
+}
+方案二：使用调用
+#include<stdio.h>
+int main(){
+    float average(float a[10]);
+    //定义数组/试题中一般是用户输入
+    float score[10] = {98,78,45,56,12,36,69,58,47,35};
+    float aver;
+    //调用vaerage()函数
+    aver = average(score);
+    printf("平均成绩为：%f",aver);
+    return 0;
+}
+float average(float a[10]){
+    float sum=0,average;
+    //求总的分数
+    for(int i=0;i<10;i++){
+	sum+=a[i];
+    }
+    average = sum/10;
+    return average;
+}
+例11、有两个班级，分别有30名和35名雪上，调用一个average函数，分别求这两个班的学生的平均成绩
+#include<stdio.h>
+int main(){
+    //需要调用的函数的声明
+    float average(float a[10],int num);
+    //分别定义两个班的学生成绩
+    float class1[10] = {15,45,78,89,56,526,12,457,8,45};
+    float class2[5]={50,50,78,56,89};
+    printf("class1的班级的平均分为%.2f\n",average(class1,10));
+    printf("class1的班级的平均分为%.2f",average(class2,5));
+    return 0;
+}
+float average(float a[10],int num){
+    float sum=0,average;
+    //求总的分数
+    for(int i=0;i<10;i++){
+	sum+=a[i];
+    }
+    average = sum/num;
+    return average;
+}
+例12、用选择法对数组中的10个整数按由小到大排序。    
+#include<stdio.h>
+int main(){
+    /*
+     * 选择法：
+     * 	  即先将10个数中最小的数与a[0]对换，在将a[1]-a[9]中最小的数与a[1]对换，每一比较一轮，找出一个未经拍戏的数中最小的一个，共比较9轮。
+     */
+    //声明函数
+    void sort(int a[10],int n);
+    //定义数组
+    int a[10]={1,5,9,7,5,3,4,6,2,12};
+    //输出排序之前的数组
+    printf("数组排序前：\n");
+    for(int i=0;i<10;i++){
+	printf("%d  ",a[i]);
+    }
+    //调用sort()函数进行排序
+    sort(a,10);
+    //输出排序之后的数组
+    printf("数组排序后：\n");
+    for(int i=0;i<10;i++){
+	printf("%d  ",a[i]);
+    }
+    return 0;
+}
+//定义sort()函数
+void sort(int arr[],int n){
+    int i,j,k,t;
+    for(i=0;i<n-1;i++){
+	k=i;
+	for(j=i+1;j<n;j++){
+	    if(arr[j]<arr[k]){
+		k=j;
+	    }
+	}
+	t=arr[k];
+	arr[k]=arr[i];
+	arr[i]=t;
+    }
+}
+7.7.3、多维数组名作函数参数
+例13、有一个3x4的矩阵，求所有元素中的最大值。
+#include<stdio.h>
+int main(){
+    int max(int arr[][4]);
+    //定义一个二维数组
+    int a[3][4] = {{1,2,5,7},{2,4,6,8},{12,15,16,18}};
+    //调用max()函数
+    printf("最大的值为:%d",max(a));
+    return 0;
+}
+int max(int a[][4]){
+    int max_value=a[0][0],i,j;
+    for(i=0;i<3;i++){			//一维的循环
+	for(j=0;j<4;j++){		//二维循环到数
+	    if(a[i][j]>max_value){	//大于就进行赋值
+		max_value=a[i][j];
+	    }
+	}
+    }
+    return max_value;
+}
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
