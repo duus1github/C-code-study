@@ -397,12 +397,91 @@ int fac(int n){
     f=f*n;
     return f;				//返回值f是n!的值
 }
-
-
-
-
-
-
+1.在文件内扩展外部变量的作用域
+例18、调用函数，求3个整数中的大者。
+#include<stdio.h>
+int main(){
+    /*
+     * 分析：用extern声明外部变量，扩展外部变量在程序文件中的作用域。
+     */
+    int max();
+    extern int A,B,C;			//把外部变量A,B,C的作用域扩展到从此开始
+    printf("请输入三个不同的数\n");
+    scanf("%d,%d,%d",&A,&B,&C);
+    printf("最大的数为：%d\n",max());
+    return 0;
+}
+int A,B,C;				//定义外部变量
+int max(){
+    int m;
+    m=A>B?A:B;
+    if(C>m){
+	m=C;
+    }
+    return m;
+}
+2.将外部变量的作用域扩展到其他文件
+例19、给定b的值，输入a和m,求a*b和a^m的值。
+file1.c(main)
+#include<stdio.h>
+int A;
+int main(){
+    int power(int);
+    int b=3,c,d,m;
+    printf("请输入a和m的值：");
+    scanf("%d,%d",&A,&m);
+    c= A*b;
+    printf("%d*%d=%d\n",A,b,c);
+    d=power(m);
+    printf("%d**%d=%d",A,m,d);
+    return 0;
+}
+file2.c(扩展函数)
+extern A;		//把在file文件中已定义的外部变量的组用于扩展到本文件
+int power(int n){
+    int i,y=1;
+    for(i=1;i<=n;i++){
+	y*=A;
+    }
+    return y;
+}
+7.10、关于变量的声明和定义
+7.11、内部函数和外部函数
+例20、有一个字符串，内有若干个字符，现输入一个字符，要求程序将字符串中该字符删去，用外部函数实现。
+file1.c(main)文件
+#include<stdio.h>
+int main(){
+    //函数声明
+    extern void enter_string(char str[]);
+    extern void delete_string(char str[],char ch);
+    extern void printf_string(char str[]);
+    //以上三行声明在本函数中将要调用的已在其他文件中定义的3个函数。
+    char c,str[80];
+    enter_string(str);			//抵用其他文件的enter_string()函数
+    scanf("%c",&c);			//输入需要删除的字符
+    delete_string(str,c);		//调用在其他文件中定义的delete_string函数
+    print_string(str);			//调用其他文件中定义的porintf_string函数
+    return 0;
+}
+file2.c
+void enter_string(char str[80]){	//定义外部函数enter_string
+    gets(str);				//向字符数组输入
+}
+file3.c
+void delete_string(char str[],char ch){	//定义外部函数delete_string
+    int i,j;
+    //遍历数组
+    for(i=j=0;str[i]!='\0';i++){
+	if(str[i]!=ch){
+	    str[j++]=str[i];
+	}
+    }
+    str[j]='\0';
+}
+file4.c
+void print_string(char str[]){		//定义外部函数print_string()函数
+    printf("%s\n",str);
+}
 
 
 
