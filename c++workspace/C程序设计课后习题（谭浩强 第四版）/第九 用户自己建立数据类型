@@ -117,4 +117,123 @@ int main(){
     }
     return 0;
 }
+9.3.1指向结构体变量的指针
+例5：通过指向结构体变量的指针变量输出结构体变量中成员的信息。
+#include<stdio.h>
+#include<string.h>
+int main(){
+    /*
+     * 思路：在已有的基础上本题要解决两个问题
+     * 	   1.怎样对结构体成员变量赋值
+     * 	   2.怎样通过指向结构体变量的指针访问结构体变量中成员。
+     */
+    //定义结构体
+    struct Student{
+	long num;
+	char name[20];
+	char sex;
+	float score;
+    };
+    //定义结构体变量
+    struct Student stu1;
+    //定义结构体指针变量
+    struct Student *p;
+    //p指向stu1
+    p=&stu1;
+    //对结构体变量的成员进行赋值
+    stu1.num=10101;
+    //用字符串复制函数给stu1.name进行赋值
+    strcpy(stu1.name,"Li Lin");
+    stu1.sex='M';
+    stu1.score=98;
+    //输出结果
+    printf("No:%d\nname:%s\nsex:%c\nscore:%f\n",stu1.num,stu1.name,stu1.sex,stu1.score);
+    //指针引用输出结果
+    printf("No:%d\nname:%s\nsex:%c\nscore:%f\n",(*p).num,(*p).name,(*p).sex,(*p).score);
+    return 0;
+}
+例6：有3个学生的信息，放在结构体数组中要求输出全部学生的信息
+#include<stdio.h>
+struct Student{     		//定义结构体类型
+    int num;
+    char name[20];
+    char sex;
+    int age;
+};
+//定义结构体数组
+struct Student stu[3] = {{10101,"Junk",'M',78},{10103,"Twang",'G',89},{10106,"Lit",'M',96}};
+int main(){
+    /*
+     * 思路：用指向结构体变量的指针来处理
+     * 	   (1)、声明结构体类型struct Student,并定义结构体数组，同时使之出始化
+     * 	   (2)、定义一个指向struct Student类型数据的指针变量p
+     * 	   (3)、使p指向结构体数组的首元素，输出他指向的元素中的有关信息
+     * 	   (4)、使p指向结构体数组的下一个元素，输出他指向的元素中的有关信息
+     * 	   (5)、在使p指向结构体数组的下一个元素，输出他指向的元素中的有关信息
+     */
+    //定义指针变量指向struct　student 的指针变量
+    struct Student *p;
+    //使用指针输出结果
+    printf("No.  name  sex  age:\n");
+    for(p=stu;p<stu+3;p++){
+	printf("%5d %-20s %2c %4d\n",p->num,p->name,p->sex,p->age);
+    }
+    return 0;
+}
+例7：有n个结构体变量，内含学生学号，姓名和3门课程的成绩，要求输出平均成绩最高的学生的信息（包括学号、姓名、3门课程成绩和平均成绩）
+#include<stdio.h>
+#define N 3
+struct Student{
+    int num;
+    char name[20];
+    float score[3];
+    float aver;
+};
+int main(){
+    /*
+     * 思路：将n个学生的数据表示为结构体数组（有n个元素），按照功能函数化的思想，分别用3个函数来实现不同的功能
+     *     (1):用input 函数来输入数据和求各位学生的平均成绩
+     *     (2):用max函数来找平均成绩最高的学生
+     *     (3):用print()函数来输出成绩最高学生的成绩
+     *    在主函数中先后调用这3个函数，用指向结构体变量的指针作实参。最后得到结果。
+     *
+     */
+    //对需要调用的函数进行声明
+    void input(struct Student stu[]);
+    struct Student max(struct Student stu[]);
+    void print(struct Student stu);
+    //定义结构体数组和指针
+    struct Student stu[N],*p=stu;
+    //调用函数进行处理
+    input(p);
+    print(max(p));
+    return 0;
+}
+void input(struct Student stu[]){
+    /*
+     * 用于接收数据并计算平均值
+     */
+    int i;
+    printf("请输入各学生的学号，姓名，三门课成绩:\n");
+    for(i=0;i<N;i++){
+	scanf("%d %s %f %f %f",&stu[i].num,&stu[i].name,&stu[i].score[0],&stu[i].score[1],&stu[i].score[2]);
+	stu[i].aver=(stu[i].score[0]+stu[i].score[1]+stu[i].score[2])/3.0;
+    }
+}
+struct Student max(struct Student stu[]){
+    /*
+     * max()函数，用于找出平均分最大的学生
+     */
+    int i ,m=0;
+    for(i=0;i<N;i++){
+	if(stu[i].aver>stu[m].aver){
+	    return stu[m];
+	}
+    }
+}
+void print(struct Student stud){
+    //输出数据
+    printf("\n成绩最高的学生是：\n");
+    printf("学号：%d\n 姓名：%s\n三门课成绩:%5.1f,%5.1f,%5.1f\n平均成绩%6.2f\n",stud.num,stud.name,stud.score[0],stud.score[1],stud.score[2],stud.aver);
+}
 
