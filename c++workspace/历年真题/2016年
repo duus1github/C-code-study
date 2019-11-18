@@ -181,8 +181,96 @@ int main(){
 填空：1：s[0],s[1]   2:str,s[1]   3:str,s[2]
 五、程序设计题
 1、编写程序，使其完成1^k+2^k+……+n^k的计算，k与n均为大于1的整数。
+#include<stdio.h>
+double power(int m,int k){ //求m的n次方并返回
+   int i;
+   double pw=1;
+   for(i=1;i<=k;++i){
+       //pw每次乘加m,k来控制乘的次数
+       pw*=m;
+   }
+   return pw;
+}
+double sum_power(int k,int n){
+    //接收k,n定义i
+    int i;
+    //初始化sum的值
+    double sum=0;
+    //循环i,
+    for(i=1;i<=n;++i){
+	//调用power()函数，即每次开方的值，并计算和
+	sum+=power(i,k);
+    }
+    return sum;
+}
+int main(){
+    double sum=0;
+    //定义k,n，并输入这两个值
+    int k,n;
+    printf("intput k:\n");
+    scanf("%d",&k);
+    printf("input n:\n");
+    scanf("%d",&n);
+    //调用sum_power()计算和
+    sum=sum_power(k,n);
+    printf("\n1^%d+2^%d+...%d^%d = %.0lf\n", k,k,n,k,sum);
+    return 0;
+}
+注意：sqrt()函数时求平方根的函数
 2、用递归方法将一个整数n(n>=1)转换成字符串。例如：输入483，应输出字符串“483”
+#include<stdio.h>
+int main(){
+    //函数声明
+    void convert(int n);
+    int num;
+    //用户输入数字
+    printf("please enter integer:\n");
+    scanf("%d",&num);
+    //输出数字字符串
+    printf("output:\n");
+    if(num<0){
+	putchar("-");
+	putchar("");
+    }
+    //调用函数
+    convert(483);
+    printf("\n");
+    return 0;
+}
+void convert(int num){
+    int i;
+    //num/10的余数不等于0，就继续调用自身
+    if((i=num/10)!=0){
+	convert(i);
+    }
+    //调用putchar()字符串输出函数输出，后面的+‘0’是转化字符串的便捷操作
+    putchar(num%10+'0');
+    //调用putchar()字符串输出函数，32对应的assci码为空格
+    putchar(32);
+}
+
 3、辗转相除法求解两个整数最大公约数的思想是：设两个整数m,n,求m除以n的余数p,
    若p!=0,则将上次的除数做被除数，上次的余数做除数，继续求余数，如此循环下去，直到余数为零，
    如此循环下去，直到余数为零，如此时的除数不为1的话，则该除数为m、n的最大公约数，否则m、n没有最大公约数。
    编写一个函数gys(int m,int n),用辗转相除法求出它们的最大公约数，返回最大公约数。
+#include<stdio.h>
+int main(){
+    int a,b,r;
+    //输入两个整数
+    printf("enter two integer:\n");
+    scanf("%d %d",&a,&b);
+    //如果a<b，就交换a与b的值
+    if(a<b){
+	r=a;
+	a=b;
+	b=r;
+    }
+    //辗转相除法，因为r的初始值不为0，所以while语句至少会执行一次，直至余数为零，跳出循环
+    while(r!=0){
+	r=a%b;
+	a=b;
+	b=r;
+    }
+    printf("最大公约数为：%d\n",a);
+    return 0;
+}
