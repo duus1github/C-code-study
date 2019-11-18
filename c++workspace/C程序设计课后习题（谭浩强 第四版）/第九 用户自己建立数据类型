@@ -14,3 +14,107 @@ int main(){
   printf(" NO:%d\n name:%s\n sex:%c\n address:%s\n",a.num,a.name,a.sex,a.addr);
   return 0;
 }
+例2：输入两个学生的学号，姓名和成绩，输出成绩较高的学生的学号，姓名和成绩
+#include<stdio.h>
+int main(){
+    /*
+     * 思路：定义两个结构相同的结构体变量student1和student2
+     * 	   分别输入两个学生的学号，姓名，成绩
+     * 	   比较连个学生的成绩，如果学生1的成绩高于学生2的成绩，就输入学生1的全部信息，
+     * 	   反之输出学生2的成绩，
+     * 	   如果两个学生成绩相等，则输出两个学生的全部信息
+     */
+    struct Student{		//什么结构体类型
+	int num;
+	char name[20];
+	float score;
+    }student1,student2;		//定义两个结构体变量student1 和student2
+    //输入学生1和学生2的成绩
+    scanf("%d%s%f",&student1.num,student1.name,&student1.score);
+    scanf("%d%s%f",&student2.num,student2.name,&student2.score);
+    //对两个学生的成绩进行比较，并按要求输出学生的信息
+    if(student1.score>student2.score){
+	printf("%d%s%f",student1.num,student1.name,student1.score); //结构体的调用
+    }else if(student2.score>student1.score){
+	printf("%d%s%f",student2.num,student2.name,student2.score);
+    }else{
+	printf("%d%s%f",student1.num,student1.name,student1.score);
+	printf("%d%s%f",student2.num,student2.name,student2.score);
+    }
+    return 0;
+}
+总结分析：关键是要理解结构体的使用，定义多个结构体变量，结构体变量的调用。
+9.2结构体使用数组
+9.2.1结构体定义数组
+例3：有3个候选人，每个选民只能投票选一个人，要求编一个统计选票的程序，旋后输入被选人的名字，最后输入各人的票结果
+#include<stdio.h>
+#include<string.h>
+struct Person{				//声明结构体类型struct Person
+    char name[20];			//候选人姓名
+    int count;				//候选人得票数
+}leader[3]={"li",0,"zhang",0,"sun",0};	//定义结构数组并初始化
+int main(){
+    /*
+     * 显然，需要建设一个结构体数组，数组中包含3个元素，每个元素的信息应包含候选人的姓名(字符型)和得票数（整型），
+     * 输入备选人的姓名，然后与数组元素中的”姓名“成员比较，如果相同，就给这个元素中的”得票数“成员的值加1.
+     * 最后输出所有元素的信息
+     */
+    int i,j;
+    char leader_name[20];		//定义字符数组
+    for(i=1;i<=10;i++){
+	scanf("%s",leader_name);
+	for(j=0;j<3;j++){		//输入所选的候选人姓名
+	    if(strcmp(leader_name,leader[j].name)==0){
+		leader[j].count++;
+	    }
+	}
+    }
+    //输出结构
+    printf("\nresult:\n");
+    for(i=0;i<3;i++){
+	printf("%5s:%d\n",leader[i].name,leader[i].count);
+    }
+    return 0;
+}
+9.2.2结构体数组的应用举例
+例4：有n个学生的信息（包括学号，姓名，成绩）要求按照成绩的高低顺序输出个学生的信息。
+#include<stdio.h>
+struct Student{
+    int num;
+    char name[20];
+    float score;
+};
+int main(){
+    /*
+     * 用结构体数组存放n个学生信息，采用选择法对个元素进行排序（进行比较的是个元素中的成绩）。
+     */
+    struct Student stu[5]={		//定义结构体类型student Student
+	    {10101,"zhang",78},
+	    {10103,"wang",89},
+	    {10106,"li",96},
+	    {10108,"Ling",57},
+	    {10110,"sun",100}};
+    //定义结构体变量temp,用作交换时的临时变量
+    struct Student temp;
+    //定义常变量n
+    const int n=5;
+    int i,j,k;
+    printf("The order is:\n");
+    for(i=0;i<n-1;i++){
+	k=i;
+	for(j=i+1;j<n;j++){
+	    if(stu[j].score>stu[k].score){//成绩比较
+		k=j;
+		temp=stu[k];
+		stu[k]=stu[i];
+		stu[i]=temp;		//stu[k]和stu[i]元素互换
+	    }
+	}
+    }
+    for(i=0;i<n;i++){
+	printf("%6d %8s %6.2f\n",stu[i].num,stu[i].name,stu[i].score);
+	printf("\n");
+    }
+    return 0;
+}
+
