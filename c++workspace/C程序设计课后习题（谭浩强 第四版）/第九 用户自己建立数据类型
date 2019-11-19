@@ -236,4 +236,198 @@ void print(struct Student stud){
     printf("\n成绩最高的学生是：\n");
     printf("学号：%d\n 姓名：%s\n三门课成绩:%5.1f,%5.1f,%5.1f\n平均成绩%6.2f\n",stud.num,stud.name,stud.score[0],stud.score[1],stud.score[2],stud.aver);
 }
+9.4.2建立简单的静态链表
+例8：建立如图9.9所示的简单链表，它由三个学生数据的结点组成，要求输出各结点中的数据。
+#include<stdio.h>
+struct Student{				//定义结构体变量
+    int num;
+    float score;
+    struct Student *next;		//定义next指针变量
+};
+int main(){
+    /*
+     * 思路：声明一个结构体类型，其成员包括num(学号)，score(分数)，next（指针变量），
+     * 	       将第一个结点的起始地址赋给头指针head,
+     * 	  将第二个结点的起始地址赋给第1个结点的next成员
+     * 	  将第三个结点的起始地址赋给第2个结点的next成员，
+     * 	  第3个结点的next成员赋值null.
+     */
+    struct Student a,b,c,*head,*p;	//声明结构体变量，指针变量等
+    a.num=1001;a.score=98.5;		//对结构体成员变量进行赋值
+    b.num=1002;b.score=65.3;
+    c.num=1003;c.score=45.7;
+    head=&a;				//将结点a的起始地址赋值给头指针head
+    a.next=&b;				//将结点b的起始位置赋值给a结点的next成员
+    b.next=&c;				//将节点c的起始位置赋值给b结点的next成员
+    c.next=NULL;			//结点c的next成员不存放其他节点的地址
+    p=head;				//使p也指向a结点
+    do{
+	printf("%d %5.1f \n",p->num,p->score);//输出p指向结点的数据
+	p=p->next;			//使p指向下一个结点
+    }while(p!=NULL);			//输出完c结点后p的值为NULL,终止循环
+    return 0;
+}
+9.4.3建立动态链表
+例9:写一个函数建立一个有3名学生数据的单向动态链表
+#include<stdio.h>
+#include<stdlib.h>
+#define LEN sizeof(struct Student)  		//动态计算数据类型的大小
+struct Student{
+    long num;
+    float score;
+    struct Student *next;
+};
+int n;
+struct Student *creat(void){
+    struct Student *head;
+    struct Student *p1,*p2;
+    n=0;
+    p1=p2=(struct Student*) malloc(LEN);	//开辟一个新单元
+    scanf("%d,%f",&p1->num，&p1->score);		//输入第一个学生的学号和成绩
+    head=NULL;
+    while(p1->num!=0){
+	n=n+1;
+	if(n==1)head == p1;
+	else p2->next =p1;
+	p2=p1;
+	p1=(struct Student *)malloc(LEN);	//动态开辟内存区，把起始地址赋给p1
+	scanf("%d,%f",*p1->num,&p1->score);	//输入其他学生的学号和成绩
+    }
+    p2->next=NULL;
+    return head;
+}
+int main(){
+    struct Strudent *pt;
+    pt=create();
+    printf("num:%d\nscore:%5.1f",pt->num,pt->score);	//输出第一个结点的成员值
+    return 0;
+}
+9.4.4输出链表
+例10：编写一个输出链表的函数print.
+#include<stdio.h>
+#include<stdlib.h>
+#define LEN sizeof(struct Student)  		//动态计算数据类型的大小
+struct Student{
+    long num;
+    float score;
+    struct Student *next;
+};
+int n;
+void print(struct Student *head){
+    struct Student *p;
+    printf("these records are:\n",n);
+    p=head;
+    if(head!=NULL){
+	do{
+	    pritnf("%d ,%f",p->num,p->score);
+	    p=p->next;
+	}while(p!=NULL);
+    }
+}
+struct Student *creat(void){
+    struct Student *head;
+    struct Student *p1,*p2;
+    n=0;
+    p1=p2=(struct Student*) malloc(LEN);	//开辟一个新单元
+    scanf("%d,%f",&p1->num,&p1->score);		//输入第一个学生的学号和成绩
+    head=NULL;
+    while(p1->num!=0){
+	n=n+1;
+	if(n==1) head = p1;
+	else p2->next =p1;
+	p2=p1;
+	p1=(struct Student *)malloc(LEN);	//动态开辟内存区，把起始地址赋给p1
+	scanf("%d,%f",*p1->num,&p1->score);	//输入其他学生的学号和成绩
+    }
+    p2->next=NULL;
+    return head;
+}
+int main(){
+    struct Strudent *head;
+    head=create();
+    print(head);
+    return 0;
+}
+9.5共同体类型
+例11：有若干人员数据，其中有学生和教师，学生的数据包括：姓名，号码，性别，职业，班级。教师的数据包括:姓名，号码，性别，职业，职务。要求用同一个表格来处理
+#include<stdio.h>
+struct{
+    int num;
+    char name[10];
+    char sex;
+    char job;
+    union {				//借助union 将一个表中不同的字段分开
+	int class;
+	char position[10];
+    }category;
+}person[2];
+int main(){
+    int i;
+    //输入两个人的数据信息
+    for(i=0;i<2;i++){
+	printf("please enter the data of person:\n");
+	//输入前4项数据
+	scanf("%d %s %c %c",&person[i].num,person[i].name,&person[i].sex,&person[i].job);
+	if(person[i].job == 's'){ //如果是学生就输入班级
+	    scanf("%d",&person[i].category.class);
+	}else if(person[i].job=='t'){
+	    scanf("%s",person[i].category.position);
+	}else{
+	    printf("input error ");
+	}
+    }
+    printf("\n");
+    // 输出数据
+    for(i=0;i<2;i++){
+	if(person[i].job=='s'){		//若是学生
+	    printf("%-6d%-10s%-4c%-4c%-10d\n",person[i].num,person[i].name,person[i].sex,person[i].job,person[i].category.class);
+	}else
+	    printf("%-6d%-10s%-4c%-4c%-10s\n",person[i].num,person[i].name,person[i].sex,person[i].job,person[i].category.position);
+    }
+    return 0;
+}
+9.6使用枚举类型
+例12：口袋中有红，黄，蓝，绿白，黑5中颜色的求若干个，每次从口袋中先后取出3个球问得到三种不同的颜色的求的可能取法取，输出每种排列的情况。
+#include<stdio.h>
+int main(){
+    //定义枚举类型
+    enum Color{
+	red ,yellow,blue,white,black
+    };
+    enum Color i,j,k,pri;
+    int n, loop;
+    n=0;
+    for(i=red;i<=black;i++){
+	for(j=red;j<black;j++){
+	    if(i!=j){
+		for(k=red;k<=black;k++){
+		    if((k!=i)&& (k!=j)){
+			n=n+1;
+			printf("%-4d",n);
+			for(loop=1;loop<=3;loop++){
+			    switch(loop){
+			    case 1:pri=i;break;
+			    case 2:pri=j;break;
+			    case 3:pri=k;break;
+			    default:break;
+			    }
+			    switch(pri){
+			    case red:printf("%-10s","red");break;
+			    case yellow:printf("%-10s","yellow");break;
+			    case blue:printf("%-10s","blue");break;
+			    case white:printf("%-10s","white");break;
+			    case black:printf("%-10s","black");break;
+			    default:break;
+			    }
+			}
+		    printf("\n");
+		    }
+		}
+	    }
+	}
+    }
+    printf("\n total :%5d\n",n);
+    return 0;
+}
+9.7使用typeof声明新类型名
 
