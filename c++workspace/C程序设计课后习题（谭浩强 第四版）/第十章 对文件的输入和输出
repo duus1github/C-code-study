@@ -1,0 +1,25 @@
+例1：从键盘输入一些字符，逐个把他们送到磁盘上取，直到用户输入一个“#"为止。
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+    FILE *fp;
+    char ch,filename[12];
+    printf("请输入使用的文件名：\n");
+    scanf("%s",filename);
+    //打开输出文件，并使fp指向此文件
+    if((fp=fopen(filename,"w"))==NULL){
+	printf("无法打开文件");
+	exit(0);			//终止程序
+    }
+    ch =getchar();			//用来接收最后的输入的回车符
+    printf("请输入一个准备存储到磁盘的字符串（以#结尾）");
+    ch = getchar();			//接收键盘输入的第一个值
+    while(ch!='#'){			//当输入”#“时循环结束
+	fputc(ch,fp);			//向磁盘文件输出一个字符
+	putchar(ch);			//将输出的字符显示在屏幕上
+	ch=getchar();			//在接收键盘输入的一个I字符
+    }
+    fclose(fp);				//关闭文件
+    putchar(10);			//向屏幕输出一行字符
+    return 0;
+}
