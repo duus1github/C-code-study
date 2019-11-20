@@ -67,6 +67,7 @@ int main(){
     printf("num=%d\n aver=%0.2f\n",i,aver);
     return 0;
 }
+总结：注意，金钱与平均数，总数都应该定义为float类型，本题更适合使用for循环，当然while()也可以但要使用&&或
 例5：要求输出100-200之间不能被3整除的数。
 #include<stdio.h>
 int main(){
