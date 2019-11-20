@@ -131,6 +131,8 @@ int main(){
 	return 0;
 }
 填空位置：1：conitnue; 2:i++; 3:i%10==0.
+总结：考察循环控制，
+考点位置：第五章循环结构——5.4for语句实现循环（例题见例5.1）。
 2、从键盘输入10个数，用选择法从小到大排序
 #include<stdio.h>
 int main(){
@@ -138,19 +140,19 @@ int main(){
 	void sort(int ,int b[]);
 	printf("please input to integer data:\n");
 	for(i=1;i<=10;i++){
-		scanf("%d",&a[i]);
+		scanf("%d",&a[i]); 1
 	}
-	sort(10,a);
+	sort(10,a); 2
 	printf("The sorted numbers:\n");
 	for(i=1;i<=10;i++){
-		printf("%d",a[i]);
+		printf("%d",a[i]); 3
 	}
 	return 0;
 }
 void sort(int n,int b[]){
 	int i,j,t;
 	for(i=1;i<n;i++){
-		for(j=i+1;j<=n;j++){
+		for(j=i+1;j<=n;j++){ 4
 			if(b[i]>b[j]){
 				t=b[i];
 				b[i]=b[j];
@@ -160,6 +162,9 @@ void sort(int n,int b[]){
 	}
 }
 填空位置：1：a[i];  2:10,a;  3:a[i];  4:i+1
+总结：选择法：预先定义一个最值，每次与原先的值进行比较，选出最值，一直循环。
+考察点：选择法的概念，函数的调用。
+考点出处：第6章习题2。
 3、找出三个字符串中的最小者
 #include<stdio.h>
 #include<string.h>
@@ -169,16 +174,18 @@ int main(){
 	for(int i=1;i<=3;i++){
 		gets(s[i]);
 	}
-	if(strcmp(s[0],s[1])<0){
-		strcpy(str,s[0]);
+	if(strcmp(s[0],s[1])<0){ 1
+		strcpy(str,s[0]); 
 	}else
-		strcpy(str,s[1]);
-	if(strcmp(str,s[2])<0)
+		strcpy(str,s[1]); 2
+	if(strcmp(str,s[2])<0) 3
 		strcpy(str,s[2]);
 	printf("最小字符串是：\n%s\n",str);
 	return 0;
 }
 填空：1：s[0],s[1]   2:str,s[1]   3:str,s[2]
+考点：字符串常用函数的意思。
+考点出处：第7章例12
 五、程序设计题
 1、编写程序，使其完成1^k+2^k+……+n^k的计算，k与n均为大于1的整数。
 #include<stdio.h>
@@ -217,6 +224,8 @@ int main(){
     return 0;
 }
 注意：sqrt()函数时求平方根的函数
+总结：对函数封装，调用。关键是利用for循环表示出i^k（使用k来控制for循环，变量i每次乘以自身）。
+题目出处：外围。
 2、用递归方法将一个整数n(n>=1)转换成字符串。例如：输入483，应输出字符串“483”
 #include<stdio.h>
 int main(){
@@ -248,7 +257,8 @@ void convert(int num){
     //调用putchar()字符串输出函数，32对应的assci码为空格
     putchar(32);
 }
-
+总结：关键是要知道使用putchar()函数，建立递归，每次使用putchar()输出一个字符。
+题目出处：第7章习题17.
 3、辗转相除法求解两个整数最大公约数的思想是：设两个整数m,n,求m除以n的余数p,
    若p!=0,则将上次的除数做被除数，上次的余数做除数，继续求余数，如此循环下去，直到余数为零，
    如此循环下去，直到余数为零，如此时的除数不为1的话，则该除数为m、n的最大公约数，否则m、n没有最大公约数。
@@ -274,3 +284,6 @@ int main(){
     printf("最大公约数为：%d\n",a);
     return 0;
 }
+总结：求最大公约数。
+题目出处：第5章课后习题3.
+全总结：此真题各个题目的选择大部分从教材中选出，有例题，也有课后习题，但大致范围来自5,6,7章的例题及课后习题。
