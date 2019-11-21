@@ -242,6 +242,7 @@ int main(){
     printf("空格数=%d,英文字母数=%d,数字=%d,其他=%d",letters,space,num,other);
     return 0;
 }
+总结：要使用getchar()来接收字符串，并用'\n'来判断是否是最后。空格直接使用' ',0-9也是用'0'<=a&&'9'>=a
 5.求Sn=a+aa+aaa+....+的值，其中a是一个数字，n表示a的位数，例如：2+22+222+....+,n由键盘输入。
 #include<stdio.h>
 #include<math.h>
@@ -257,6 +258,7 @@ int main(){
     printf("和为：%d",s);
     return 0;
 }
+总结：注意每个a的值，aa=a*10+a.
 6.求（1！+2！+3！...+20!+n!）
 #include<stdio.h>
 #include<math.h>
@@ -270,6 +272,7 @@ int main(){
     printf("1!+2!+...+20!=%22.15e",s);
     return 0;
 }
+总结：n用于控制循环，不能直接获取最终的值，要利用t.,输出要用%e
 7.求(1-100)k+(1-50)k^2+(1-10)1/k;
 #include<stdio.h>
 #include<math.h>
