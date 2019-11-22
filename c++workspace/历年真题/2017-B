@@ -6,7 +6,7 @@
     在主函数调用函数时，函数名后面扩放中的变量被称为“实际参数”
     在函数调用过程中系统会将实际参数值传递给被调用函数的形参，即形参从实参中得到一个值，该值在函数调用期间有效，可以参与该函数中的计算。
 二、程序阅读题（每小题6分，共30分）
-1.
+1.（错）
 #include<stdio.h>
 int a=100;
 void s(){
@@ -22,7 +22,9 @@ void main(){
     s();
   }
 }
-程序运行后输出的结果：103 21
+程序运行后输出的结果：103 21 正解 10121
+				10222
+				10323
 2.
 #include<stdio.h>
 void main(){
@@ -37,7 +39,7 @@ void main(){
   }
   printf("%d\n",x);
 }
-程序运行输出的结果：19  注意  x/3,是求余还是整除
+程序运行输出的结果：19  注意  x/3,是求余还是整除 正确：17
 3.
 #include<stdio.h>
 int f(int a){
@@ -53,7 +55,7 @@ void main(){
 	for(i=0; i<3; i++)
 		printf("%2d", f(a));
 }
-程序运行后的输出结果为：7
+程序运行后的输出结果为：7 正确：7 8 9
 4.
 #include<stdio.h>
 int sum(int n){ 
@@ -66,7 +68,7 @@ int sum(int n){
 void main(){ 
 	printf("sum(5)=%d\n",sum(5));
 }
-程序运行后的输出结果为：sum(5)=152
+程序运行后的输出结果为：sum(5)=153
 5.
 #include<stdio.h>
 int runc(int a,int b){
@@ -158,7 +160,7 @@ int main(){
   }
   return 0;
 }
-2、用递归方法求5!。
+2（错）、用递归方法求5!。
 #include<stdio.h>
 int num(int n){
   n*=(n-1);
