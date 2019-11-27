@@ -14,6 +14,8 @@ int main(){
   printf(" NO:%d\n name:%s\n sex:%c\n address:%s\n",a.num,a.name,a.sex,a.addr);
   return 0;
 }
+总结：struct结构体类型可以在main函数中直接定义，但常用的话是定义在mian函数之前。
+
 例2：输入两个学生的学号，姓名和成绩，输出成绩较高的学生的学号，姓名和成绩
 #include<stdio.h>
 int main(){
