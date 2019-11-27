@@ -31,6 +31,7 @@ void main(){
 程序运行后输出的结果为：1 -2
 总结：c语言中一数值1代表‘真’，以0代表‘假’，则!0为‘真’(注：将!0认为是真)。
 考点：--x,x-=2等关系运算式
+
 2.（错）
 #include<stdio.h>
 void main(){
@@ -50,6 +51,7 @@ void main(){
             5           55555
 总结：如果在循环操作不确定时，可以在草稿纸详细进行演算，以得出答案，必须认真对待每一个分值。
 考点：嵌套for循环的调用
+
 3.（错）
 #include<stdio.h>
 void main(){
@@ -64,7 +66,8 @@ void main(){
 程序输入123，运行后的输出结果为：232   正解：321
 总结：输入123，(1).x%10余数为3，(2).x/10,即123整除10=12。(3).x%10即12%10，余数为2。(4).12/10=1。(5).1%10的余数为1.，
      所以正好输出321.
-考点：正确区分/整除，%求余两者之间的区别。     
+考点：正确区分/整除，%求余两者之间的区别。  
+
 4.（错）
 #include<stdio.h>
 void main(){
@@ -78,6 +81,7 @@ void main(){
 总结：两个执行相减，即为两个元素间的相对距离。
 考点：指针两个元素相减：两个地址之差（除以）数组元素的长度，即两个元素之间的相对距离。
 题目出处：p232 8.3.2
+
 5.
 #include<stdio.h>
 void main(){
@@ -91,6 +95,7 @@ void main(){
 程序运行输出结果：20
 总结：可以看出a[10]为i-9之间的10个整数，第二个for循环即为控制输出k的值，这里k是通过关系运算符进行计算。
 考点：for循环，for循环中的输出，混合运算表达式：先算等号右侧。
+
 三、根据流程图写程序（每小题10分，共20分）
 (1)根据下面流程图，写出相应的程序。
 #include<stdio.h>
@@ -190,7 +195,7 @@ void main(){
       
 五、程序设计题
 1.任意读取一个整数，依次输出其符号及从低位到高位上的数字
-#intclude<stdio.h>
+#include<stdio.h>
 int main(){
   /*
    计算输入的字符的长度，循环求余。
@@ -212,6 +217,40 @@ int main(){
   }
   return 0;
 }
+订正：
+#include<stdio.h>
+int main(){
+  /*
+   计算输入的字符的长度，循环求余。
+   */
+  int num,i;
+  //todo:定义字符变量用于存放符号
+  char sign;
+  //todo:接收用户输入的数字
+  printf("请输入任意数字：\n");
+  scanf("%d",&num);
+  //判断数字的符号
+  if(num>=0){
+    sign='+';
+  }else if(num<0){
+    sign='-';
+  }
+  printf("%c",sign);
+  //对输入的数据进行循环处理，并输出每位数字
+  //使用do……while()循环更合适。
+  do{
+    i=num%10;		//每次除以10，求得它的余数
+    printf("%d",i);	//输出这个余数
+    num=num/10;		//每次整除10，即降位。
+  }while(num!=0);	//如果正好num每杯整除，则说明已经是个位数了，结束循环
+  return 0;
+}
+总结：
+    错误原因：(1)没有降位运算，自己误以为%10与/10同样的效果。
+    	     (2)使用do……while()循环更加合适。
+    思考：在做此类题型时，1.要分析题目中的规律，最好是先画流程图，
+    			2.判断使用哪一种循环，不要上来就使用for,或者while循环，要用最合适的循环。
+
 2.求sin(x)的近似值，(x是弧度)，计算公式如下；
   sin x=x-x^3/3!+x^5/5!+x^7/7!+……+((-1)^(n+1)x(-2n-1))/(2n-1)!+……
   考虑适当的精确度求，假设n=10.
@@ -253,8 +292,31 @@ int main(){
   printf("sin_%d=%f",n,sin_);
   return 0;
 }
-3.设有三个候选人，每次输入一个得票的候选人的名字，要求最后输出各人得票结果。
-30个人进行投票。
+订正：
+#include<stdio.h>
+#include<math.h>
+void main()
+{
+	int  i;
+	float  x,sum,a,b;  //sum代表和，a为分子，b为分母
+	char s;
+	printf("please input x");
+	scanf("%f",&x);
+	s=1;
+	sum=0;
+	a=x;     //分母赋初值
+	b=1;     //分子赋初值
+	for(i=1;a/b>=1e-6;i++)
+	{
+	    sum=sum+s*a/b;    	//累加一项
+	    a=a*x*x;     	//求下一项分子
+	    b=b*2*i*(2*i+1);   	//求下一项分母
+	    s*=-1;
+	}
+	printf("sum=%f\n",sum);
+}
+
+3.设有三个候选人，每次输入一个得票的候选人的名字，要求最后输出各人得票结果。30个人进行投票。
 struct person{
   char name[20];
   int count;
@@ -262,21 +324,47 @@ struct person{
 #include<stdio.h>
 int main(){
   int i,j,n=30;
-  char name;
+  char name;(错:该类型的定义要与struct类型一致。)
   for(i=1;i<=30;i++){
-    scanf("%c",name);
+    scanf("%c",name);(错:应该使用%s,因为用户输入的name是一个字符串)
     for(j=0;j<3;j++){
-      if(name ==candidates[i].name)
+      if(name ==candidates[i].name) （错:应该使用strcmp(str1,str2)==0来进行判断两个字符串相等）
         candidates[i].count++;
     }
   }
   //最后输出结果
   for(j=0;j<3;j++){
-    printf("%c,%d",candidates[i].name,candidates[i].count);
+    printf("%c,%d",candidates[i].name,candidates[i].count);(错:输出的name类型格式为%s).
   }
   return 0;
 }
-
+订正：
+#include<stdio.h>
+#include<string.h>
+struct Person{
+    char name[20];
+    int count;
+}leader[3]={"Li",0,"Zhang",0,"Sun",0};
+int main(){
+    //定义字符数组
+    char leader_name[20];	//与struct中的名字长度一致
+    int count,i,j;
+    for(i=1;i<=5;i++){
+	scanf("%s",leader_name);//接收用户所选的人名
+	for(j=0;j<3;j++){
+	    if(strcmp(leader_name,leader[j].name)==0)
+		leader[j].count++;
+	}
+    }
+    printf("\nResult:\n");
+    for(i=0;i<3;i++){
+	printf("%5s:%d\n",leader[i].name,leader[i].count);
+    }
+    return 0;
+}
+题目出处：例9.3.
+考点：结构体的简单使用。
+总结；在使用结构体使要充分使用数组循环得到个体，然后.元素变量来进行操作。
 
 
 
