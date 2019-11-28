@@ -1,9 +1,17 @@
-一、	简答题（每小题10分，共20分）
-1、	简述预编译指令define的其中三种用法。
-2、	简述全局变量的优缺点。
-3、	文件的一般操作过程.
+一、	简答题（每小题10分，共30分）
+1、简述预编译指令define的其中三种用法。
+答：difine在文件起始部分定义一个常量。
+2、简述全局变量的优缺点。
+答：全局变量：即定义在函数之外，能被本文件直接使用的变量。
+优点：整个文件任何一函数都可以使用该变量，使用方便。
+缺点：如果函数中定义了同名的局部变量，那数据较多时，会导至不好调试，后期维护麻烦，一般在较大型的项目中不建议使用全局变量
+3、文件的一般操作过程.
+答：(1)获取文件路径，
+   (2):使用fopen函数打开文件
+   (3):对文件进行读写操作
+   (4)关闭文件fclose()方法
 
-二、	程序阅读题（每小题4分，共20分）
+二、程序阅读题（每小题4分，共20分）
 1、#include <stdio.h>
 void main( )
 {
@@ -14,7 +22,7 @@ void main( )
    printf(“a[%d][%d]=%d\n”, i , j,*(p+i*4+j));
 }
 输入1，2
-程序运行后的输出结果为：
+程序运行后的输出结果为：a[1][2]=13
 
 2、
 #include <stdio.h>
@@ -27,7 +35,7 @@ void main( )
        }
     printf("%d, %d",i,k);
  }
-程序运行后的输出结果为：
+程序运行后的输出结果为：2,3,5
 
 3、 #include<stdio.h>
 void main( )
@@ -45,12 +53,12 @@ void main( )
   printf(“x=%d\n”,x);
   return 0;
 }
-程序运行后的输出结果为：
+程序运行后的输出结果为：x=10
 
-4、	#include<stdio.h>
+4、#include<stdio.h>
 void main( )
 { 
-   int 	I,j,a[2][3];
+   int 	i,j,a[2][3];
    for (i=0;i<2;i++)
    {
       for(j=0;j<3;j++)
@@ -61,29 +69,47 @@ void main( )
 printf(“\n”);
 }
 }
-程序运行后的输出结果为：
-
+程序运行后的输出结果为：	012
+			  123				
 5、#include<stdio.h>
 # define  N  6
 void main()
 {
-	int a[N],*p=a;
-   for(;p<a+N;)
-      scanf(“%d”,p++);
+   	int a[N],*p=a;
+   	for(;p<a+N;)
+      		scanf(“%d”,p++);
 	for(;p>a;)
-      printf(“%d”,*(--p));
+      		printf(“%d”,*(--p));
  }
 输入： 2 4 6 8 10 12
-程序运行后的输出结果为：
+程序运行后的输出结果为：12108642
 
-三、	根据流程图写出相应的程序（每题10分，共20分）
+三、根据流程图写出相应的程序（每题10分，共20分）
 （1）根据下面程序流程图，写出相应的程序。
+ #include<stdio.h>
+ int main(){
+    int x,s=0;
+    printf("请输入整数x：\n");
+    do{
+      scanf("%d",&x);
+      s=s+x;
+    }while(x!=0)
+    printf("%d",s);
+    return 0;
+ }
  
-
 （2）根据下面程序流程图，写出相应的程序。
- 
+ #include<stdio.h>
+ int main(){
+   int i=1,s=0;
+   for(;i<=100;i+=2){
+   	s=s+i;
+   }
+   printf("%d",s);
+   return 0;
+ }
 
-四、	程序填空（每空2分，共20分）
+四、程序填空（每空2分，共20分）
 1、已知下面程序的输出结果:ABCDCD，请完善程序：
     #include "stdio.h"
      void main( )
@@ -93,7 +119,8 @@ void main()
                  printf("%s", __○2____);
             printf("\n");
      }
-		
+填空 1:chp!='\0'  2:*chp+chp
+
 2、输入一个正整数，将其逆向输出，请完善程序：
 #include "stdio.h"
 void main( )
@@ -107,6 +134,7 @@ void main( )
           x=x/10;
      }
 }
+填空 1:x!=0  2:x=
 3、编写函数，将一个给定的整数转换成字符串，请完善程序：
 void   to_str(int  n)
 {  
@@ -115,27 +143,29 @@ void   to_str(int  n)
    if(n<0) 
    {    putchar('-');     
         ○1 
-}
+    }
     while(n>0)
     {  string[i++]=n%10+'0'; 
-○2
-}
+	○2
+    }
     while(--i>=0) 
       putchar(string[i]);
 }
+填空 1:fabs(n)  2:putchar(string[i]);
 
-4、	输入20个数，将其逆序输出
+4、输入20个数，将其逆序输出
  #include "stdio.h"
 void main( )
 { 
   int  a[20],i;
   for(i=0;i<20;i++)
-scanf(“%d”, ○1);
-        for(i=19;i>=0;i--)
-printf(“%d”, ○2);
+       	scanf(“%d”, ○1);
+  for(i=19;i>=0;i--)
+	printf(“%d”, ○2);
       }
+填空  1:&a[i] 2:a[i]
 
-5、	输出100以内的素数
+5、输出100以内的素数
 #include "stdio.h"
 #include "math.h"
 void main( )
@@ -151,8 +181,9 @@ void main( )
           printf(“%d”,m);
      }
   }
+填空 1:m/2 2:2
 
-五、	程序设计题（每小题20分，共60分）
+五、程序设计题（每小题20分，共60分）
 1、任意读取一个整数，依次输出其符号位及从高位到低位上的数字。此题与四-3题相似
 2、用迭代法求a的算数平方根。公式 ：xn=0.5*(xn-1+a/xn-1)  
  确定初值为x0, 取a/2为x0的初值，迭代结束条件:|x1-x0|<=10-5.
