@@ -151,7 +151,7 @@ void   to_str(int  n)
     while(--i>=0) 
       putchar(string[i]);
 }
-填空 1:fabs(n)  2:putchar(string[i]);
+填空 1:n=fabs(n)  2:putchar(string[i]);
 
 4、输入20个数，将其逆序输出
  #include "stdio.h"
@@ -185,10 +185,66 @@ void main( )
 
 五、程序设计题（每小题20分，共60分）
 1、任意读取一个整数，依次输出其符号位及从高位到低位上的数字。此题与四-3题相似
+#include<stdio.h>
+#include<math.h>
+int main(){
+  int x,i,n=10;
+  printf("请输入一个整数");
+  scanf("%d",&x);
+  if(x<0);
+     putchar("-");
+     x=fabs(x);
+  int len=sizeof(x+'0');
+  for(i=1;i<len;i++){
+     n*=10;
+  }
+  while(x!=0){
+     printf("%d",x/n);
+     x=x%n;
+     n=n/10
+  }
+  return 0;
+}
 2、用迭代法求a的算数平方根。公式 ：xn=0.5*(xn-1+a/xn-1)  
  确定初值为x0, 取a/2为x0的初值，迭代结束条件:|x1-x0|<=10-5.
+#include<stdio.h>
+int main(){
+  int a,n,i,t;
+  float x;
+  printf("请输入a,n的值\n");
+  scanf("%d,%d",&a,&n);
+  x=a/2;
+  for(i=1;i<=n;i++){
+    t=x-=1;
+    x=0.5*(t+a/t)
+  }
+  
+}
 3、编写一个30名学生信息状况的示意性检索程序，每名学生的信息包括：xh(学号)、xb（性别）、cj（成绩）、xm(姓名)。
 要求：
 （1）输入30名学生信息；
 （2）输出男同学中成绩大于90的学生的xm、xb、cj。  
+struct Student{
+   int xh;
+   char xb;
+   float cj;
+   char xm[20];
+}student[30];
+int main(){
+  int i;
+  printf("请输入30个学生的数据：\n");
+  for(i=0;i<30;i++){
+    scanf("%d,%c,%f,%s",student[i].xh,student[i].xb,student[i].cj,student[i].xm);
+  }
+  for(i=0;i<30;i++){
+    if(student[i].cj>90){
+  	printf("%s,%c,%f",student[i].xm,student[i].xb,student[i].cj);
+    }
+  }
+  return 0;
+}
+
+
+
+
 
