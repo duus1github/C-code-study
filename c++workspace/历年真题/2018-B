@@ -1,0 +1,163 @@
+一、	简答题（每小题10分，共20分）
+1、	简述预编译指令define的其中三种用法。
+2、	简述全局变量的优缺点。
+3、	文件的一般操作过程.
+
+二、	程序阅读题（每小题4分，共20分）
+1、#include <stdio.h>
+void main( )
+{
+  int a[3][4]={{1,3,5,7},{9,11,13,15},{17,19,21,23}};
+  int *p,i,j ;
+   p=&a[0][0];
+   scanf(“%d,%d”,&i,&j);
+   printf(“a[%d][%d]=%d\n”, i , j,*(p+i*4+j));
+}
+输入1，2
+程序运行后的输出结果为：
+
+2、
+#include <stdio.h>
+void main( ) 
+{   int i=3, j=2, k;
+    k=i+j;
+      {  int k=8;
+         if(i==4) printf("%d, "  , k);
+         else  printf("%d," ,  j);
+       }
+    printf("%d, %d",i,k);
+ }
+程序运行后的输出结果为：
+
+3、 #include<stdio.h>
+void main( )
+{
+	int x;
+	switch(x=1)
+  {
+     case 0: x=5;break;
+     case 1: switch(x=1)
+           {
+             case 1: x=10;break;
+             case 2:x=20;break;
+            }
+  }
+  printf(“x=%d\n”,x);
+  return 0;
+}
+程序运行后的输出结果为：
+
+4、	#include<stdio.h>
+void main( )
+{ 
+   int 	I,j,a[2][3];
+   for (i=0;i<2;i++)
+   {
+      for(j=0;j<3;j++)
+      {
+         a[i][j]=i+j;
+         printf(“%d”,a[i][j]);
+}
+printf(“\n”);
+}
+}
+程序运行后的输出结果为：
+
+5、#include<stdio.h>
+# define  N  6
+void main()
+{
+	int a[N],*p=a;
+   for(;p<a+N;)
+      scanf(“%d”,p++);
+	for(;p>a;)
+      printf(“%d”,*(--p));
+ }
+输入： 2 4 6 8 10 12
+程序运行后的输出结果为：
+
+三、	根据流程图写出相应的程序（每题10分，共20分）
+（1）根据下面程序流程图，写出相应的程序。
+ 
+
+（2）根据下面程序流程图，写出相应的程序。
+ 
+
+四、	程序填空（每空2分，共20分）
+1、已知下面程序的输出结果:ABCDCD，请完善程序：
+    #include "stdio.h"
+     void main( )
+     { 
+            char *chp="ABCD";
+            for( ; ___○1____; chp=chp+2)
+                 printf("%s", __○2____);
+            printf("\n");
+     }
+		
+2、输入一个正整数，将其逆向输出，请完善程序：
+#include "stdio.h"
+void main( )
+{ 
+    int x;
+    printf("Enter x:");
+    scanf("%d",&x);
+    while(○1)
+    { 
+          printf("%d",○2 x%10);
+          x=x/10;
+     }
+}
+3、编写函数，将一个给定的整数转换成字符串，请完善程序：
+void   to_str(int  n)
+{  
+   char string[10];
+   int i=0;
+   if(n<0) 
+   {    putchar('-');     
+        ○1 
+}
+    while(n>0)
+    {  string[i++]=n%10+'0'; 
+○2
+}
+    while(--i>=0) 
+      putchar(string[i]);
+}
+
+4、	输入20个数，将其逆序输出
+ #include "stdio.h"
+void main( )
+{ 
+  int  a[20],i;
+  for(i=0;i<20;i++)
+scanf(“%d”, ○1);
+        for(i=19;i>=0;i--)
+printf(“%d”, ○2);
+      }
+
+5、	输出100以内的素数
+#include "stdio.h"
+#include "math.h"
+void main( )
+{ 
+   int i,m,k;
+   for(m=2;m<=100;m++)
+   {
+       k=○1
+       for(i=○2;i<=k;i++)
+         if(m%i==0)
+            break;
+       if(i>=k+1)
+          printf(“%d”,m);
+     }
+  }
+
+五、	程序设计题（每小题20分，共60分）
+1、任意读取一个整数，依次输出其符号位及从高位到低位上的数字。此题与四-3题相似
+2、用迭代法求a的算数平方根。公式 ：xn=0.5*(xn-1+a/xn-1)  
+ 确定初值为x0, 取a/2为x0的初值，迭代结束条件:|x1-x0|<=10-5.
+3、编写一个30名学生信息状况的示意性检索程序，每名学生的信息包括：xh(学号)、xb（性别）、cj（成绩）、xm(姓名)。
+要求：
+（1）输入30名学生信息；
+（2）输出男同学中成绩大于90的学生的xm、xb、cj。  
+
