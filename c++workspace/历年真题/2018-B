@@ -1,8 +1,16 @@
 一、	简答题（每小题10分，共30分）
 1、简述预编译指令define的其中三种用法。
-答：difine在文件起始部分定义一个常量。
+答：(1).difine在文件起始部分定义一个常量。
+
+订正：(1).定义符号常量：用#define指令指定一个符号名称代表一个变量。
+     (2).可以定义一个函数
+     (3).定义执行代码快
 2、简述全局变量的优缺点。
 答：全局变量：即定义在函数之外，能被本文件直接使用的变量。
+订正：
+	(1)全局变量在程序的全部执行过程中都占用存储单元，而不是仅需要是才开辟单元
+	(2)使函数的通用性降低了，因为在函数中引用全局变量那么执行情况会受到有关外部变量的影响，特别是到局部变量与全局变量相同时，就会出现问题。
+	(3)使用全局变量过多会降低程序的清析性，往往会很难判断每个瞬间的各个外部变量的值，且各个函数执行时都有可能改变外部变量的值，容易出错。
 优点：整个文件任何一函数都可以使用该变量，使用方便。
 缺点：如果函数中定义了同名的局部变量，那数据较多时，会导至不好调试，后期维护麻烦，一般在较大型的项目中不建议使用全局变量
 3、文件的一般操作过程.
@@ -93,10 +101,26 @@ void main()
     do{
       scanf("%d",&x);
       s=s+x;
-    }while(x!=0)
+    }while(x!=0)  (错:编译错误，应为x的获取在循环里，所以x在做判断是并没有做初始化，导致编译错误)
     printf("%d",s);
     return 0;
  }
+ 订正：
+#include<stdio.h>
+int main()
+    {
+    int x, s = 0;
+    printf("请输入整数x：\n");
+    scanf("%d",&x);
+    while(x!=0){
+	s=s+x;
+	scanf("%d",&x);
+    }
+    printf("%d",s);
+    return 0;
+    }
+总结：使用while()循环，并在循环内在此接收x.
+提示：不要怕麻烦，在手写代码时要充分考虑情况。
  
 （2）根据下面程序流程图，写出相应的程序。
  #include<stdio.h>
@@ -119,11 +143,11 @@ void main()
                  printf("%s", __○2____);
             printf("\n");
      }
-填空 1:chp!='\0'  2:*chp+chp
+填空 1:chp!='\0'  2:*chp+chp  订正：1:*chp!='\0'   2:chp
 
 2、输入一个正整数，将其逆向输出，请完善程序：
 #include "stdio.h"
-void main( )
+void main()
 { 
     int x;
     printf("Enter x:");
@@ -134,7 +158,7 @@ void main( )
           x=x/10;
      }
 }
-填空 1:x!=0  2:x=
+填空 1:x!=0  2:空
 3、编写函数，将一个给定的整数转换成字符串，请完善程序：
 void   to_str(int  n)
 {  
@@ -151,10 +175,10 @@ void   to_str(int  n)
     while(--i>=0) 
       putchar(string[i]);
 }
-填空 1:n=fabs(n)  2:putchar(string[i]);
+填空 1:n=fabs(n)  2:putchar(string[i]);  订正：2:n=n/10
 
 4、输入20个数，将其逆序输出
- #include "stdio.h"
+#include "stdio.h"
 void main( )
 { 
   int  a[20],i;
@@ -181,7 +205,7 @@ void main( )
           printf(“%d”,m);
      }
   }
-填空 1:m/2 2:2
+填空 1:m/2  2:2 订正：1:sqrt(m);
 
 五、程序设计题（每小题20分，共60分）
 1、任意读取一个整数，依次输出其符号位及从高位到低位上的数字。此题与四-3题相似
@@ -194,7 +218,7 @@ int main(){
   if(x<0);
      putchar("-");
      x=fabs(x);
-  int len=sizeof(x+'0');
+  int len=sizeof(x+'0');//错：不可使用sizeof()，因为此函数用于求该变量的字符长度，int类型的变量为4，double类型变量为8.
   for(i=1;i<len;i++){
      n*=10;
   }
@@ -205,21 +229,50 @@ int main(){
   }
   return 0;
 }
+正解：
+void f(int n){  //定义函数，并接收用户输入的值
+    //用户输入值的情况，如果小于10就直接输数该数
+    if(n<10){
+	printf("%d ",n);
+    }else{ //如果用户输入的数大于10
+	f(n/10);//直接递归n/10
+	printf("%d ",n%10);//每次输出余数
+    }
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    if(n<0){
+	printf("-");
+	fabs(n);
+    }else{
+	printf("+");
+    }
+    return 0;
+}
+总结，在多少位数未知的情况下，选择使用递归来设计该题是最好的结果
+
 2、用迭代法求a的算数平方根。公式 ：xn=0.5*(xn-1+a/xn-1)  
  确定初值为x0, 取a/2为x0的初值，迭代结束条件:|x1-x0|<=10-5.
 #include<stdio.h>
+#include<math.h>
 int main(){
-  int a,n,i,t;
-  float x;
-  printf("请输入a,n的值\n");
-  scanf("%d,%d",&a,&n);
-  x=a/2;
-  for(i=1;i<=n;i++){
-    t=x-=1;
-    x=0.5*(t+a/t)
-  }
-  
+    float x1,x0;
+    int a;
+    scanf("%d",&a);
+    //初始化定义x0和x1，
+    x0=a/2;
+    x1=(x0+a/x0)/2;
+    //循环执行的语句。	
+    do{
+	x0=x1;
+	x1=(x0+a/x0)/2;
+    }while(fabs(x1-x0)<=1e-5);
+    //输出结果
+    printf("The square root of %5.2f  is %8.5f\n",a,x1);
 }
+总结：(1)求绝对值使用函数fabs().
+      (2).体中给出了循环退出的条件，显示适合使用do……while()循环。
 3、编写一个30名学生信息状况的示意性检索程序，每名学生的信息包括：xh(学号)、xb（性别）、cj（成绩）、xm(姓名)。
 要求：
 （1）输入30名学生信息；
@@ -234,16 +287,19 @@ int main(){
   int i;
   printf("请输入30个学生的数据：\n");
   for(i=0;i<30;i++){
-    scanf("%d,%c,%f,%s",student[i].xh,student[i].xb,student[i].cj,student[i].xm);
+    //scanf("%d,%c,%f,%s",student[i].xh,student[i].xb,student[i].cj,student[i].xm); 错：1.字符串接收数据使用gets()方法更合适 
+    											2.在接收数据时要使用&符号，千万不能忘记。
+	scanf("%d,%c%f",&student[i].xh,&student[i].xb,&student[i].cj);
+	gets(students[i].xm);
   }
   for(i=0;i<30;i++){
-    if(student[i].cj>90){
+    if(student[i].cj>90){//错：1.缺少判断条件，题目给出的是男生满90分的，两个条件都要符合。
   	printf("%s,%c,%f",student[i].xm,student[i].xb,student[i].cj);
     }
   }
   return 0;
 }
-
+总结：在定义结构体数组时，可以在结构体声明之后定义数组，也可以在mian()函数中定义结构体数据(struct Student stu[10]);
 
 
 
