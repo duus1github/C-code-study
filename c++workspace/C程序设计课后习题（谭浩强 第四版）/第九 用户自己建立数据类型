@@ -3,6 +3,23 @@
 1.1自己建立结构类型
 1.2定义结构体类型变量
 例1：把一个学生的信息（包括学号，姓名，性别，住址）放在一个结构体变量中，然后输出这个学生的信息。
+/*
+ * 第10章
+ * 例1：把一个学生的信息（包括学号，姓名，性别，住址）放在一个变量体中然后输出这个学生的信息
+ * 思路：(1)构建一个变量体包含学号，姓名，性别，住址
+ *     (2)声明结构体变量，并对该变量进行赋值
+ */
+struct Student{
+    int num;
+    char name[20];
+    char sex;
+    char addr[50];
+}stu={1001,"Li",'n',"sdjfiowe"};
+int main(){
+    printf("num=%d\n name=%s\n sex=%c\n addr=%s\n",stu.num,stu.name,stu.sex,stu.addr );
+    return 0;
+}
+//总结：单字符数据的接收和输出都要用%c.
 #include<stdio.h>
 int main(){
   struct Student{
@@ -15,6 +32,7 @@ int main(){
   return 0;
 }
 总结：struct结构体类型可以在main函数中直接定义，但常用的话是定义在mian函数之前。
+
 
 例2：输入两个学生的学号，姓名和成绩，输出成绩较高的学生的学号，姓名和成绩
 #include<stdio.h>
@@ -78,6 +96,39 @@ int main(){
     }
     return 0;
 }
+/*
+ * 第10章
+ * 例2：有三个候选人每个选民只能投票选伊人，要求编写一个统计选票的程序，先后输入被选人的名字，最后输出个人的票结果
+ * 思路：(1)先创建结构体包含姓名和票数,要先对其进行初始化
+ *     (2)main函数中对for循环进行投票
+ *     (3)使用for循环对数据进行输出
+ *
+ */
+#include<stdio.h>
+#include<string.h>
+struct Student{
+    char name[20];
+    int count;
+}stu[3]={"Li",0,"Qo",0,"Yi",0};
+int main(){
+    //for循环输入票
+    int i,j;
+    char s_name[20];
+    printf("请投票");
+    for(i=0;i<5;i++){//假设有5个人投票
+	gets(s_name);
+	for (j = 0; j < 3; j++)
+	    if (strcmp(s_name, stu[j].name) == 0)
+		stu[j].count++;
+    }
+    //输出最终的票数
+    for(i=0;i<3;i++)
+	printf("%s,%d",stu[i].name,stu[i].count);
+    return 0;
+}
+/*总结：1。在输出数据时，需要两层for循环，一层是用与控制用户数，另一层则是控制结构体变量数组。
+ *    2.比较两个字符串的大小，使用strcmp()函数。
+ */
 9.2.2结构体数组的应用举例
 例4：有n个学生的信息（包括学号，姓名，成绩）要求按照成绩的高低顺序输出个学生的信息。
 #include<stdio.h>
