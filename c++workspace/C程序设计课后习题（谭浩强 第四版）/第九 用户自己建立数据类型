@@ -183,37 +183,30 @@ int main(){
 例5：通过指向结构体变量的指针变量输出结构体变量中成员的信息。
 #include<stdio.h>
 #include<string.h>
+struct Student{
+    int num;
+    char name[20];
+    char sex;
+    float score;
+}stu_1,*p;		//定一结构体变量，及指向结构体类型数据的指针变量p
 int main(){
-    /*
-     * 思路：在已有的基础上本题要解决两个问题
-     * 	   1.怎样对结构体成员变量赋值
-     * 	   2.怎样通过指向结构体变量的指针访问结构体变量中成员。
-     */
-    //定义结构体
-    struct Student{
-	long num;
-	char name[20];
-	char sex;
-	float score;
-    };
-    //定义结构体变量
-    struct Student stu1;
-    //定义结构体指针变量
-    struct Student *p;
-    //p指向stu1
-    p=&stu1;
-    //对结构体变量的成员进行赋值
-    stu1.num=10101;
-    //用字符串复制函数给stu1.name进行赋值
-    strcpy(stu1.name,"Li Lin");
-    stu1.sex='M';
-    stu1.score=98;
+    //定义p指向stu_1
+    p=&stu_1;
+    //对结构体指针变量进行赋值
+    stu_1.num=10001;
+    strcpy(stu_1.name,"Li");
+    stu_1.sex='M';
+    stu_1.score=87;
     //输出结果
-    printf("No:%d\nname:%s\nsex:%c\nscore:%f\n",stu1.num,stu1.name,stu1.sex,stu1.score);
-    //指针引用输出结果
-    printf("No:%d\nname:%s\nsex:%c\nscore:%f\n",(*p).num,(*p).name,(*p).sex,(*p).score);
+    printf("num:%d\nname:%s\nsex:%c\nscore:%f\n",stu_1.num,stu_1.name,stu_1.sex,stu_1.score);
+    printf("num:%d\nname:%s\nsex:%c\nscore:%f\n",(*p).num,(*p).name,(*p).sex,(*p).score);
     return 0;
 }
+/*
+ * (1)这里使用（*P）表示p指向结构体变量，两侧的括号不可省略，因为成员运算符。优先于“*”
+ * (2)同时c语言允许将(*p).num 等同于  p->num  来代替
+ */
+
 例6：有3个学生的信息，放在结构体数组中要求输出全部学生的信息
 #include<stdio.h>
 struct Student{     		//定义结构体类型
@@ -242,6 +235,11 @@ int main(){
     }
     return 0;
 }
+/*
+ * 总结：(1)结构体体变量定义数组时一个大括号内部需要划分小括号，是因为数组能自动根据数组长度来自动划分。所以定义数组长度即可
+ *     (2)for指针，p=stu:初始化指针的位置;p<stu+3:stu+3就表示3,；p++：即每次指向下一个。
+ */
+
 例7：有n个结构体变量，内含学生学号，姓名和3门课程的成绩，要求输出平均成绩最高的学生的信息（包括学号、姓名、3门课程成绩和平均成绩）
 #include<stdio.h>
 #define N 3
@@ -298,6 +296,39 @@ void print(struct Student stud){
     printf("\n成绩最高的学生是：\n");
     printf("学号：%d\n 姓名：%s\n三门课成绩:%5.1f,%5.1f,%5.1f\n平均成绩%6.2f\n",stud.num,stud.name,stud.score[0],stud.score[1],stud.score[2],stud.aver);
 }
+方案二：
+#include<stdio.h>
+#include<string.h>
+struct Student{
+    int num;
+    char name[20];
+    float score[3];
+    float aver;
+}stu[3];
+int main(){
+    //循环stu,用户来输入学生的信息。
+    int i,j,k;
+    float sum[3],temp;
+    for(i=0;i<3;i++){
+	scanf("%d %s %f %f %f",&stu[i].num,&stu[i].name,&stu[i].score[0],&stu[i].score[1],&stu[i].score[2]);
+	stu[i].aver=(stu[i].score[0]+stu[i].score[1]+stu[i].score[2])/3.0;
+    }
+    //对平均成绩得出最高值
+    for(i=0;i<3;i++){
+	if(stu[i].aver>stu[k].aver){
+	    k=i;
+	}
+    }
+    printf("\n学号：%d\n姓名：%s\n三门课成绩：%f,%f,%f\n平均成绩：%f\n",stu[k].num,stu[k].name,stu[k].score[0],stu[k].score[1],stu[k].score[2],stu[k].aver);
+    return 0;
+}
+/*
+ * 总结：(1)定义结构体的三门科目时，需要定义为数组，形式，
+ *     (2)三门科目结构体接收数据时，要分开获取，形式如：stu[i].score[0]....
+ *     (3)输出平均分最高的数，这里是for循环数据，stu[i].aver与stu[k].aver 进行比较，大于的化就令k=i.以此来获取下标。
+ *     (4)最后输出下标为k的那一组数据。
+ */
+
 9.4.2建立简单的静态链表
 例8：建立如图9.9所示的简单链表，它由三个学生数据的结点组成，要求输出各结点中的数据。
 #include<stdio.h>
@@ -329,6 +360,17 @@ int main(){
     }while(p!=NULL);			//输出完c结点后p的值为NULL,终止循环
     return 0;
 }
+/*
+ * 总结：这是一个简单的链表，其步骤如下：
+ * 	(1)定义结构体，包含需要输出的变量，和用于指向下一个结点的next指针变量。
+ * 	(2)声明结构体变量用以做为链表的结点，同时声明两个指针变量
+ * 	(3)对以上声明的结构体变量进行赋值，以使后续的指针指向时能输出信息
+ * 	(4)对上述的指针进行指向，构造链表。先用head指针指向a,然后调用结构体中的next指针指向b,依次循环，最后的结点指针指向定义为NUll
+ * 	(5)将head赋值给p,便于数据输出
+ * 	(6)借用do……while循环来进行输出，
+ * 	(7)p的指向进行输出，同时p不断的指向next.
+ */
+ 
 9.4.3建立动态链表
 例9:写一个函数建立一个有3名学生数据的单向动态链表
 #include<stdio.h>
