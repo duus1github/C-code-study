@@ -1,0 +1,39 @@
+一、链表
+1.1 建立一个有3名学生数据的单向动态列表（例9.9）
+#include<stdio.h>
+#include<string.h>
+#define LEN sizeof(struct Student)
+//todo:定义结构体 变量，内含next指针变量，可以指向下一个结点
+struct Student{
+    long num;
+    float score;
+    struct Student *next;   			//定义结点体指针变量
+};
+int n;						//定义全局变量
+//todo:定义函数，此函数返回一个指向链表表头的指针
+struct Student *creat(void){
+    struct Student *head;			//定义结构体指针，head，和p1,p2
+    struct Student *p1,*p2;
+    n=0;
+    p1=p2=(struct Student *)malloc(LEN);	//开辟结构体新单元,并使p1,p2指向它malloc(LEN)：开辟一个长度为len的内存区
+    scanf("%1d,%f,",&p1->num,&p1->score);	//输入第1个学生的学号和成绩给p1所指的结点
+    head=NULL;					//定义head指针为空
+    while(p1->num!=0){				//约定第一个结点num学号不能为0
+	n=n+1;					//n用于控制结点
+	if(n==1)head=p1;			//如果n=1,即第一个结点时，p1指向head
+	else p2->next =p1;			//如果不是第一个结点时，p1就指向   p2指向下一个结点
+	p2=p1;					//然后p1都指向p2
+	p1=(struct Student *)malloc(LEN);	//开辟动态储存区，把起始地址赋给p1
+	scanf("%1d,%f",&p1->num,&p1->score);	//输入其他学生的学号和成绩
+    }
+    p2->next =NULL;				//表尾的结点指针量NULL.
+    return head;
+}
+int main(){
+    struct Student *pt;
+    pt=create();				//函数返回链表第一个结点的地址
+    printf("%1d,%f",pt->num,pt->score);		//输出第一个结点的成员值
+}
+/*
+ * 总结：只能了解大概，还需继续继续了解
+ */
