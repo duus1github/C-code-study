@@ -53,12 +53,12 @@ void main(){
   }
   printf("num=%d\n",num);
 }
-程序输出： num=40
+程序输出： num=40  订正：num=42
           num=6
           
 3.    
 #include<stdio.h>
-stuct st{
+struct st{
   int num;
   char name[8];
   int age;
@@ -86,7 +86,8 @@ void main(){
     printf("k=%d\n",k);
   }
 }
-输出：12
+输出：12 订正：k=5
+              k=12
 
 5.
 #include<stdio.h>
