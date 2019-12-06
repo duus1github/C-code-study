@@ -217,7 +217,7 @@ int main(){
 int main(){
   double x,y;
   printf("请输入x的值:\n");
-  scanf("%f",&x);
+  scanf("%f",&x);         //订正:双精度接收数据使用%lf
   if(x<0 && x!=-4){
     y=2*x*x+3*x-4;
   }else if(x>=0&&x<10 && x!=5){
@@ -235,9 +235,9 @@ int main(){
   int i,num=0;
   char str[80];
   printf("请输入字符串");
-  gets(str); //注：gets()方法获取字符串
+  gets(str); //注：gets()方法获取字符串  也可以使用scanf("%s",str);
   //遍历每个字符
-  for(i=0;str=='\0';i++){
+  for(i=0;str=='\0';i++){   //订正：str[i]!='\0'  
     if(str[i]>'a' && str[i]<'z' || str[i]>'A' && str[i]<'Z'){
       num++;
     }
@@ -245,6 +245,8 @@ int main(){
   printf("英文字母的个数为“%d",num);
   return 0;
 }
+总结：for循环字符串数组，其中判断条件为最后一个字符'\0' 只要str[i]不等于它就好了。同时也要记住str[i](即为当个字符)
+
 3.编写程序，根据下式求PI的近似值，直到最后一项小于精度eps=0.00001.
 #include<stdio.h>
 int main(){
