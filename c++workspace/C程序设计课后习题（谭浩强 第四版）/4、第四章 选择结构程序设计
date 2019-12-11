@@ -251,7 +251,35 @@ int main(){
     }
 
     return 0;
-}  
+}
+方案二：
+#include<stdio.h>
+#include<math.h>
+int main(){
+    int n,i=1,a,b;
+    scanf("%d",&n);
+    //todo:1.判断它是一个小于5位数
+    if(fabs(n)<100000){
+	//todo:2.判断他是几位数
+
+	while(n!=0){
+	    printf("a=%d",n%10);
+	    i=i+1;
+	    n=n/10;
+	}
+	printf("i=%d",i);
+    }else{
+	printf("请输入5位数");
+    }
+    return 0;
+}
+/*
+ * 总结：	输出数的每个位数字使用n%10,
+ * 	降位，使用 n/10
+ * 	判断位数是否已经完成，使用整除后是否为0
+ * 	本次设计需要在循环中实现。
+ */
+
 10.略
 11.输入4个整数，要求由小到大的顺序输出。
 #include<stdio.h>
