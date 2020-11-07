@@ -205,21 +205,32 @@ int main(){
     }
     return 0;
 }
-3.求一个3x3的整型矩阵的对角线元素之和
+/**
+ * 第六章:
+ * 	3、求一个3X3的整形矩阵对角元素之和
+ */
 #include<stdio.h>
-int main(){
-    /*
-     * 先要指定3x3阶的数组
-     * 然后筛选出对角元素
-     * 求和
-     */
-    int sum=0;
-    int a[3][3]={{1,2,3},{4,5,6},{7,8,9}};
-    for(int i=0;i<3;i++){
-	sum+=a[i][i];
-    }
-    printf("%6d\n",sum);
-    return 0;
+int main() {
+	//TODO:定义一个二维矩阵，并用for循环进行赋值
+	int arr[3][3],sum=0;
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++)
+			arr[i][j]=(i+1)*(j+1);
+	//TODO:输出这个原始的3维矩阵
+	for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++)
+				printf("%3d",arr[i][j]);
+			printf("\n");
+	}
+	//TODO:获取对角元素的和
+	for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				if(i==j)
+					sum+=arr[i][j];
+			}
+	}
+	printf("矩阵对角元素之和为%d",sum);
+	return 0;
 }	
 4.有一个已排好序的数组，要求输入一个数后，按原来排序的规律将它插入数组中。
 #include<stdio.h>
