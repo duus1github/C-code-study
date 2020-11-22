@@ -293,27 +293,33 @@ void convert(int num){
    若p!=0,则将上次的除数做被除数，上次的余数做除数，继续求余数，如此循环下去，直到余数为零，
    如此循环下去，直到余数为零，如此时的除数不为1的话，则该除数为m、n的最大公约数，否则m、n没有最大公约数。
    编写一个函数gys(int m,int n),用辗转相除法求出它们的最大公约数，返回最大公约数。
+方案一：
+/**
+ * 2006年真题    程序设计题
+ * 			3、辗转相除法求最大公约数
+ *
+ */
 #include<stdio.h>
-int main(){
-    int a,b,r;
-    //输入两个整数
-    printf("enter two integer:\n");
-    scanf("%d %d",&a,&b);
-    //如果a<b，就交换a与b的值
-    if(a<b){
-	r=a;
-	a=b;
-	b=r;
-    }
-    //辗转相除法，因为r的初始值不为0，所以while语句至少会执行一次，直至余数为零，跳出循环
-    while(r!=0){
-	r=a%b;
-	a=b;
-	b=r;
-    }
-    printf("最大公约数为：%d\n",a);
-    return 0;
+int sys(int m,int n){
+	int r;					//用于存储余数
+	if(m<n){
+		r=m;
+		m=n;
+		n=r;
+	}
+	while(r!=0){
+		r=m%n;
+		m=n;
+		n=r;
+	}
+	if(n!=1)
+		printf("n为m,n的最大公约数");
+	else
+		printf("m,n没有最大公约数");
+
+	return n;
 }
+
 总结：求最大公约数。
 题目出处：第5章课后习题3.
 全总结：知识点：for循环的控制，continue,i++,字符串函数（）strcmpy()比较两个字符串的大小，> 返回1；= 返回0 ；< 返回-1。
