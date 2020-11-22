@@ -259,35 +259,28 @@ int main(){
 2、用递归方法将一个整数n(n>=1)转换成字符串。例如：输入483，应输出字符串“483”
 #include<stdio.h>
 int main(){
-    //函数声明
-    void convert(int n);
-    int num;
-    //用户输入数字
-    printf("please enter integer:\n");
-    scanf("%d",&num);
-    //输出数字字符串
-    printf("output:\n");
-    if(num<0){
-	putchar("-");
-	putchar("");
-    }
-    //调用函数
-    convert(483);
-    printf("\n");
-    return 0;
+	void convert(int n);
+	int num;
+	printf("please enter your numbers:\n");
+	scanf("%d",&num);
+	printf("output:\n");
+	if(num<0){
+		putchar('-');
+	}
+	convert(num);
+	return 0;
 }
 void convert(int num){
-    int i;
-    //num/10的余数不等于0，就继续调用自身
-    if((i=num/10)!=0){
-	convert(i);
-    }
-    //调用putchar()字符串输出函数输出，后面的+‘0’是转化字符串的便捷操作
-    putchar(num%10+'0');
-    //调用putchar()字符串输出函数，32对应的assci码为空格
-    putchar(32);
+	int i;
+	if((i=num/10)!=0){
+		convert(i);
+	}
+	putchar(num%10+'0');
 }
-总结：关键是要知道使用putchar()函数，建立递归，每次使用putchar()输出一个字符。
+总结：1、关键是要知道使用putchar()函数，建立递归，每次使用putchar()输出一个字符。
+	2、putchar(32）对应的是ascii码中的空格，即输出一个空格
+	3、putchar(num+'0')，后面加的0是转化为字符串的简便操作。
+
 题目出处：第7章习题17.
 3、辗转相除法求解两个整数最大公约数的思想是：设两个整数m,n,求m除以n的余数p,
    若p!=0,则将上次的除数做被除数，上次的余数做除数，继续求余数，如此循环下去，直到余数为零，
