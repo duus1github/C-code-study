@@ -196,6 +196,28 @@ int main(){
 考点出处：第7章例12
 五、程序设计题
 1、编写程序，使其完成1^k+2^k+……+n^k的计算，k与n均为大于1的整数。
+方案一：
+#include<stdio.h>
+int main(){
+	int n,k,total=0;
+	int sum(int n,int k);
+	printf("请输入n和k\n");
+	scanf("%d%d",&n,&k);
+	if(n>1||k>1){
+		for(int i=0;i<=n;i++)
+			total+=sum(i,k);
+	}
+	printf("res:%d",total);
+	return 0;
+}
+int sum(int n,int k){
+	for(int i=2;i<=k;i++){
+		n*=n;
+	}
+	return n;
+}
+
+方案二：
 #include<stdio.h>
 double power(int m,int k){ //求m的n次方并返回
    int i;
